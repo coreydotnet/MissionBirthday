@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MissionBirthday.Infrastructure.Ocr
+namespace MissionBirthday.Contracts.Ocr
 {
     public class OcrResults
     {
