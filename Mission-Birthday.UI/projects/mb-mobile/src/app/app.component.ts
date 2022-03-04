@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { CameraService } from './services/camera.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  public photo$: Observable<string>;
   title = 'mb-mobile';
+
+  constructor(private readonly camera: CameraService) {
+  }
+
+  public snapPicture(): void {
+    this.photo$ = this.camera.takePicture();
+  }
 }

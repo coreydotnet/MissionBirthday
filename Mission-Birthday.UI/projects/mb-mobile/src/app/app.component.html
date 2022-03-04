@@ -21,3 +21,5 @@
 <router-outlet></router-outlet>
 
 <lib-hound-bot></lib-hound-bot>
+<button (click)="snapPicture()">Take Photo</button>
+<img [src]="photo$ | async"/>
