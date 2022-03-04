@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicModule } from '@ionic/angular';
+import { HoundBotModule } from 'hound-bot';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HoundBotModule,
     IonicModule.forRoot()
   ],
   providers: [],
