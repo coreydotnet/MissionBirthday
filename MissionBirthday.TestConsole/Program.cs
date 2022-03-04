@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using MissionBirthday.Infrastructure.Ocr;
+using MissionBirthday.Logic.Ocr;
 
 namespace MissionBirthday.TestConsole
 {

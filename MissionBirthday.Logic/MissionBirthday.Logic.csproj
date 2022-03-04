@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision" Version="7.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MissionBirthday.Contracts\MissionBirthday.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

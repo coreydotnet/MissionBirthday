@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
+using MissionBirthday.Contracts.Ocr;
 
-namespace MissionBirthday.Infrastructure.Ocr
+namespace MissionBirthday.Logic.Ocr
 {
-    public class OcrService
+    public class OcrService : IOcrService
     {
         private static readonly TimeSpan requestDelay = TimeSpan.FromSeconds(1);
 
