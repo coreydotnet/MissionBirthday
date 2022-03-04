@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CameraService } from './services/camera.service';
 
 @Component({
