@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "mb-mobile": {
+      "name": "mb-mobile",
+      "integrations": {
+        "capacitor": {}
+      },
+      "type": "angular",
+      "root": "projects\\mb-mobile"
+    }
+  },
+  "defaultProject": "mb-mobile"
+}
