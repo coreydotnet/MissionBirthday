@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using MissionBirthday.Contracts.Models;
 using MissionBirthday.Logic.Ocr;
 
 namespace MissionBirthday.TestConsole
@@ -16,11 +19,18 @@ namespace MissionBirthday.TestConsole
 
         private static async Task TestOcr()
         {
-            const string fileUrl = @"";
+            const string imagePath = @"C:\Users\user\Pictures\image.jpg";
 
-            var service = new OcrService();
+            using var imageStream = File.OpenRead(imagePath);
 
-            var results = await service.ReadAsync(endpoint: "", subscriptionKey: "", fileUrl);
+            var service = new OcrService(Options.Create(
+                new OcrOptions
+                {
+                    DocReaderEndpoint = "https://mb-docreader.cognitiveservices.azure.com/",
+                    DocReaderKey = "Insert Key Here"    // NOTE: do not check in with actual key
+                }));
+
+            var results = await service.ReadAsync(imageStream);
 
             foreach (var line in results.TextLines)
                 Console.WriteLine(line);

@@ -32,8 +32,9 @@ namespace MissionBirthday.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MissionBirthday.Api", Version = "v1" });
             });
 
-            services.AddMissionBirthdayServices();
-            services.AddRepositories();
+            services.ConfigureMissionBirthdayOptions(Configuration)
+                .AddMissionBirthdayServices()
+                .AddRepositories();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
