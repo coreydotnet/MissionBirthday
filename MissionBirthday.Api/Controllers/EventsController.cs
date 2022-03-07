@@ -13,7 +13,7 @@ using MissionBirthday.Contracts.Ocr;
 namespace MissionBirthday.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class EventsController : ControllerBase
     {
         private long MaxImageBytes = 6 * 1024 * 1024;
