@@ -21,7 +21,7 @@ API keys and connection string credentials should not be checked into source con
   "OcrOptions:DocReaderKey": "<insert key here>"
 }
 ```
-3. Replace `<insert key here>` with keys from Azure resources.
+3. Replace `<insert key here>` with key 1 from Azure resources (`MissionBirthdayRG` > `mb-docReader` > `Keys and Endpoint`).
 4. Save and exit.
 
 # Contribute
