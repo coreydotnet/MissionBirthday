@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MissionBirthday.Persistence;
 
 namespace MissionBirthday.Api
 {
@@ -13,7 +16,11 @@ namespace MissionBirthday.Api
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            ApplyMigrations(host.Services);
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,5 +29,12 @@ namespace MissionBirthday.Api
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        private static void ApplyMigrations(IServiceProvider services)
+        {
+            using var scope = services.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<MbDataContext>();
+            db.Database.Migrate();
+        }
     }
 }

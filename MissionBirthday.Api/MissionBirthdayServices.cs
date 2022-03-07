@@ -4,9 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MissionBirthday.Contracts;
 using MissionBirthday.Contracts.Models;
 using MissionBirthday.Contracts.Ocr;
+using MissionBirthday.Contracts.Repositories;
+using MissionBirthday.Logic;
 using MissionBirthday.Logic.Ocr;
+using MissionBirthday.Persistence.Repositories;
 
 namespace MissionBirthday.Api
 {
@@ -22,11 +26,13 @@ namespace MissionBirthday.Api
         public static IServiceCollection AddMissionBirthdayServices(this IServiceCollection services)
         {
             services.AddSingleton<IOcrService, OcrService>();
+            services.AddScoped<IEventManager, EventManager>();
             return services;
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IEventRepository, EventRepository>();
             return services;
         }
     }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MissionBirthday.Contracts.Models;
 using MissionBirthday.Contracts.Ocr;
@@ -17,10 +18,12 @@ namespace MissionBirthday.Logic.Ocr
         private static readonly TimeSpan requestDelay = TimeSpan.FromSeconds(1);
 
         private readonly OcrOptions options;
+        private readonly ILogger<OcrService> logger;
 
-        public OcrService(IOptions<OcrOptions> options)
+        public OcrService(ILogger<OcrService> logger, IOptions<OcrOptions> options)
         {
             this.options = options.Value;
+            this.logger = logger;
         }
 
         public async Task<OcrResults> ReadAsync(Stream imageStream)
@@ -41,33 +44,42 @@ namespace MissionBirthday.Logic.Ocr
 
         private async Task<OcrResults> ReadFileUrl(ComputerVisionClient client, Stream imageStream)
         {
-            //var textHeaders = await client.ReadAsync(fileUrl);
-            var textHeaders = await client.ReadInStreamAsync(imageStream);
-
-            string operationLocation = textHeaders.OperationLocation;
-
-            // We only need the ID and not the full URL
-            const int numberOfCharactersInOperationId = 36;
-            string operationId = operationLocation.Substring(operationLocation.Length - numberOfCharactersInOperationId);
-            Guid operationGuid = Guid.Parse(operationId);
-
-            // Extract the text
-            ReadOperationResult results;
-
-            await Task.Delay(requestDelay);
-            do
-            {
-                // free tier limit of 20 calls per minute
-                await Task.Delay(requestDelay);
-                results = await client.GetReadResultAsync(operationGuid);
-            } while (results.Status == OperationStatusCodes.Running || results.Status == OperationStatusCodes.NotStarted);
-
             OcrResults result = null;
 
-            if (results.Status == OperationStatusCodes.Succeeded)
+            try
             {
-                var textUrlFileResults = results.AnalyzeResult.ReadResults;
-                result = new OcrResults(textUrlFileResults.SelectMany(page => page.Lines).Select(line => line.Text));
+                //var textHeaders = await client.ReadAsync(fileUrl);
+                var textHeaders = await client.ReadInStreamAsync(imageStream);
+
+                string operationLocation = textHeaders.OperationLocation;
+
+                // We only need the ID and not the full URL
+                const int numberOfCharactersInOperationId = 36;
+                string operationId = operationLocation.Substring(operationLocation.Length - numberOfCharactersInOperationId);
+                Guid operationGuid = Guid.Parse(operationId);
+
+                // Extract the text
+                ReadOperationResult results;
+
+                await Task.Delay(requestDelay);
+                do
+                {
+                    // free tier limit of 20 calls per minute
+                    await Task.Delay(requestDelay);
+                    results = await client.GetReadResultAsync(operationGuid);
+                } while (results.Status == OperationStatusCodes.Running || results.Status == OperationStatusCodes.NotStarted);
+
+
+                if (results.Status == OperationStatusCodes.Succeeded)
+                {
+                    var textUrlFileResults = results.AnalyzeResult.ReadResults;
+                    result = new OcrResults(textUrlFileResults.SelectMany(page => page.Lines).Select(line => line.Text));
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to process image stream");
+                throw;
             }
 
             return result;

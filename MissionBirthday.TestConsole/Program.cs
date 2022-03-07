@@ -23,7 +23,7 @@ namespace MissionBirthday.TestConsole
 
             using var imageStream = File.OpenRead(imagePath);
 
-            var service = new OcrService(Options.Create(
+            var service = new OcrService(null, Options.Create(
                 new OcrOptions
                 {
                     DocReaderEndpoint = "https://mb-docreader.cognitiveservices.azure.com/",
