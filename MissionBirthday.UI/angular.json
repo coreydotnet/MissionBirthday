@@ -96,7 +96,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "mb-mobile:build"
+            "browserTarget": "mb-mobile:build",
+            "proxyConfig": "projects/mb-mobile/src/proxy.conf.json"
           },
           "configurations": {
             "production": {

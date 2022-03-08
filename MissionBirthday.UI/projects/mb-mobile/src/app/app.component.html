@@ -23,6 +23,7 @@
 <lib-hound-bot></lib-hound-bot>
 <button (click)="snapPicture()">Take Photo</button>
 <img [src]="photo$ | async"/>
+<p>Found text: {{ocr$ | async }}</p>
 
 <button (click)="getLocation()">Get GeoLocation</button>
 <p>{{location$ | async }}</p>
