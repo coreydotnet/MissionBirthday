@@ -9,9 +9,9 @@ using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MissionBirthday.Contracts.Models;
-using MissionBirthday.Contracts.Ocr;
+using MissionBirthday.Contracts.AzureAi;
 
-namespace MissionBirthday.Logic.Ocr
+namespace MissionBirthday.Logic.AzureAi
 {
     public class OcrService : IOcrService
     {

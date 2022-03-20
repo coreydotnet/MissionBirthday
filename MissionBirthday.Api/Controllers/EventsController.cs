@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MissionBirthday.Contracts;
 using MissionBirthday.Contracts.Models;
-using MissionBirthday.Contracts.Ocr;
 
 namespace MissionBirthday.Api.Controllers
 {

@@ -14,15 +14,17 @@ TODO: Describe and show how to build your code and run the tests.
 ## User Secrets
 API keys and connection string credentials should not be checked into source control.
 
-1. Right-click MissionBirthday.Api and choose Manage User Secrets
-2. Replace the contents of secrets.json with the following:
+1. Right-click `MissionBirthday.Api` and choose Manage User Secrets
+2. Replace the contents of `secrets.json` with the following:
 ```
 {
-  "OcrOptions:DocReaderKey": "<insert key here>"
+  "OcrOptions:DocReaderKey": "<mb-docReader key>",
+  "LanguageServiceOptions:MbLanguageKey": "<mb-language key>"
 }
 ```
-3. Replace `<insert key here>` with key 1 from Azure resources (`MissionBirthdayRG` > `mb-docReader` > `Keys and Endpoint`).
-4. Save and exit.
+3. Replace `<mb-docReader key>` with key 1 from Azure resources (`MissionBirthdayRG` > `mb-docReader` > `Keys and Endpoint`).
+4. Replace `<mb-language key>` with key 1 from Azure resources (`MissionBirthdayRG` > `mb-language` > `Keys and Endpoint`).
+5. Save and close `secrets.json`.
 
 # Contribute
 TODO: Explain how other users and developers can contribute to make your code better. 
