@@ -26,9 +26,13 @@ namespace MissionBirthday.Api
 
         public static IServiceCollection AddMissionBirthdayServices(this IServiceCollection services)
         {
+            // Singletons
             services.AddSingleton<IOcrService, OcrService>();
             services.AddSingleton<IEntityExtractionService, EntityExtractionService>();
-            services.AddScoped<IEventManager, EventManager>();
+
+            // Scoped (usually require a DB repository)
+            services.AddScoped<IEventService, EventService>();
+
             return services;
         }
 

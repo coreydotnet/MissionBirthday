@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using MissionBirthday.Contracts;
 using MissionBirthday.Contracts.Models;
 using MissionBirthday.Contracts.AzureAi;
@@ -12,35 +11,20 @@ using MissionBirthday.Contracts.Repositories;
 
 namespace MissionBirthday.Logic
 {
-    public class EventManager : IEventManager
+    public class EventService : IEventService
     {
-        private readonly IEventRepository events;
+        private readonly IEventRepository repository;
         private readonly IOcrService ocrService;
         private readonly IEntityExtractionService entityExtractionService;
 
-        public EventManager(IEventRepository events, IOcrService ocrService, IEntityExtractionService entityExtractionService)
+        public EventService(IEventRepository repository, IOcrService ocrService, IEntityExtractionService entityExtractionService)
         {
-            this.events = events;
+            this.repository = repository;
             this.ocrService = ocrService;
             this.entityExtractionService = entityExtractionService;
         }
 
-        public async Task<ICollection<Event>> GetAllAsync()
-        {
-            return await events.GetAll().ToArrayAsync();
-        }
-
-        public Task<Event> GetAsync(int eventId)
-        {
-            return events.GetAsync(eventId);
-        }
-
-        public Task<int> CreateAsync(Event mbEvent)
-        {
-            return events.CreateAsync(mbEvent);
-        }
-
-        public async Task<Event> CreateEventFromImageAsync(Stream imageStream)
+        public async Task<EventDocument> CreateEventFromImageAsync(Stream imageStream)
         {
             Event mbEvent = null;
 
@@ -68,20 +52,10 @@ namespace MissionBirthday.Logic
             var addressString = FindEntity(EntityCategory.Address);
             // TODO: convert to address class and assign to location
 
-            var newId = await CreateAsync(mbEvent);
+            var newId = await repository.CreateAsync(mbEvent);
             mbEvent.Id = newId;
 
-            return mbEvent;
-        }
-
-        public Task UpdateAsync(Event mbEvent)
-        {
-            return events.UpdateAsync(mbEvent);
-        }
-
-        public Task DeleteAsync(int id)
-        {
-            return events.DeleteAsync(id);
+            return new EventDocument(document, mbEvent);
         }
 
         private async Task<string> ReadDocumentAsync(Stream imageStream)

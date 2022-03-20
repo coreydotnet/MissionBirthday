@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MissionBirthday.Contracts;
 using MissionBirthday.Contracts.Models;
+using MissionBirthday.Contracts.Repositories;
 
 namespace MissionBirthday.Api.Controllers
 {
@@ -17,24 +18,26 @@ namespace MissionBirthday.Api.Controllers
     {
         private long MaxImageBytes = 6 * 1024 * 1024;
         private readonly ILogger<EventsController> _logger;
-        private readonly IEventManager events;
+        private readonly IEventRepository repository;
+        private readonly IEventService eventService;
 
-        public EventsController(ILogger<EventsController> logger, IEventManager eventManager)
+        public EventsController(ILogger<EventsController> logger, IEventRepository repository, IEventService eventService)
         {
             _logger = logger;
-            events = eventManager;
+            this.repository = repository;
+            this.eventService = eventService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            return Ok(await events.GetAllAsync());
+            return Ok(await repository.GetAllAsync());
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
-            var mbEvent = await events.GetAsync(id);
+            var mbEvent = await repository.GetAsync(id);
 
             return mbEvent != null
                 ? Ok(mbEvent)
@@ -56,7 +59,7 @@ namespace MissionBirthday.Api.Controllers
             await file.CopyToAsync(imageStream);
             imageStream.Position = 0;
 
-            var mbEvent = await events.CreateEventFromImageAsync(imageStream);
+            var mbEvent = await eventService.CreateEventFromImageAsync(imageStream);
             return mbEvent != null
                 ? Ok(mbEvent)
                 : UnprocessableEntity();
@@ -68,7 +71,7 @@ namespace MissionBirthday.Api.Controllers
             if (mbEvent == null)
                 return BadRequest();
 
-            var newId = await events.CreateAsync(mbEvent);
+            var newId = await repository.CreateAsync(mbEvent);
 
             return Ok(newId);
         }
@@ -79,7 +82,7 @@ namespace MissionBirthday.Api.Controllers
             if (mbEvent == null || mbEvent.Id != id)
                 return BadRequest();
 
-            await events.UpdateAsync(mbEvent);
+            await repository.UpdateAsync(mbEvent);
 
             return Ok();
         }
@@ -87,7 +90,7 @@ namespace MissionBirthday.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            await events.DeleteAsync(id);
+            await repository.DeleteAsync(id);
 
             return Ok();
         }

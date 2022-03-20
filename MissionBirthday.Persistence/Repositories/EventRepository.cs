@@ -18,12 +18,13 @@ namespace MissionBirthday.Persistence.Repositories
             this.context = context;
         }
 
-        public IQueryable<Event> GetAll()
+        public async Task<ICollection<Event>> GetAllAsync()
         {
-            return QueryEvents()
+            return await QueryEvents()
                 .AsNoTracking()
                 .OrderBy(e => e.StartTime)
-                .Select(e => e.ToApi());
+                .Select(e => e.ToApi())
+                .ToArrayAsync();
         }
 
         public async Task<Event> GetAsync(int id)

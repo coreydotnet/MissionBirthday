@@ -9,7 +9,7 @@ namespace MissionBirthday.Contracts.Repositories
 {
     public interface IEventRepository
     {
-        IQueryable<Event> GetAll();
+        Task<ICollection<Event>> GetAllAsync();
 
         Task<Event> GetAsync(int id);
 
