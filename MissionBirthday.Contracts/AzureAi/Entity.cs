@@ -27,4 +27,15 @@ namespace MissionBirthday.Contracts.AzureAi
         
         public double ConfidenceScore { get; }
     }
+
+    public static class EntityExtensions
+    {
+        public static bool IsAddress(this Entity e) => e.Category == EntityCategory.Address;
+
+        public static bool IsGpeLocation(this Entity e) => e.Category == EntityCategory.Location && string.Equals(e.SubCategory, "GPE", StringComparison.OrdinalIgnoreCase);
+
+        public static bool IsNumberQuantity(this Entity e) => e.Category == EntityCategory.Quantity && string.Equals(e.SubCategory, "Number", StringComparison.OrdinalIgnoreCase);
+        
+        public static string TextOrDefault(this Entity entity, string defaultValue = "") => entity?.Text ?? defaultValue;
+    }
 }

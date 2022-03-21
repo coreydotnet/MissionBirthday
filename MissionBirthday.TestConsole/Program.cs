@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MissionBirthday.Contracts.Models;
 using MissionBirthday.Logic.AzureAi;
+using MissionBirthday.Logic.Events;
+using Newtonsoft.Json;
 
 namespace MissionBirthday.TestConsole
 {
@@ -43,10 +45,11 @@ namespace MissionBirthday.TestConsole
 
         private static async Task TestLanguage(ILogger<EntityExtractionService> logger)
         {
-            const string document = @"St. Vincent de Paul
+            const string document = @"
+St. Vincent de Paul
 Food Donations
 1103 NE Elm St
-Prineville, OR 97754
+Klamath Falls, OR 97754
 Contact us at: 775-555-2354 or visit us online at www.sierrabiblechurch.org
 Here's what to bring:
 - peanut butter
@@ -69,6 +72,14 @@ Here's what to bring:
             {
                 Console.WriteLine($"{entity.Category} ({entity.SubCategory}), score={entity.ConfidenceScore}, text={entity.Text}");
             }
+
+            var converter = new EntitiesToEventConverter();
+            var mbEvent = converter.ConvertToEvent(result);
+
+            var jsonString = JsonConvert.SerializeObject(mbEvent, Formatting.Indented);
+
+            Console.WriteLine("Converted Event:");
+            Console.WriteLine(jsonString);
         }
     }
 }

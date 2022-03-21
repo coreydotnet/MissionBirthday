@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MissionBirthday.Contracts.Models;
 
-namespace MissionBirthday.Contracts
+namespace MissionBirthday.Contracts.Events
 {
     public interface IEventService
     { 

@@ -1,27 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MissionBirthday.Contracts;
 using MissionBirthday.Contracts.Models;
 using MissionBirthday.Contracts.AzureAi;
 using MissionBirthday.Contracts.Repositories;
+using MissionBirthday.Contracts.Events;
 
-namespace MissionBirthday.Logic
+namespace MissionBirthday.Logic.Events
 {
     public class EventService : IEventService
     {
         private readonly IEventRepository repository;
         private readonly IOcrService ocrService;
         private readonly IEntityExtractionService entityExtractionService;
+        private readonly IEntitiesToEventConverter converter;
 
-        public EventService(IEventRepository repository, IOcrService ocrService, IEntityExtractionService entityExtractionService)
+        public EventService(IEventRepository repository, IOcrService ocrService, IEntityExtractionService entityExtractionService, IEntitiesToEventConverter converter)
         {
             this.repository = repository;
             this.ocrService = ocrService;
             this.entityExtractionService = entityExtractionService;
+            this.converter = converter;
         }
 
         public async Task<EventDocument> CreateEventFromImageAsync(Stream imageStream)
@@ -30,27 +30,7 @@ namespace MissionBirthday.Logic
 
             var document = await ReadDocumentAsync(imageStream);
             var entities = await entityExtractionService.AnalyzeAsync(document);
-
-            string FindEntity(EntityCategory category)
-            {
-                return entities.FirstOrDefault(e => e.Category == category)?.Text ?? string.Empty;
-            }
-
-            // TODO: Fill out event
-            mbEvent = new Event()
-            {
-                Organization = FindEntity(EntityCategory.Organization),
-                PhoneNumber = FindEntity(EntityCategory.PhoneNumber),
-                Email = FindEntity(EntityCategory.Email),
-                Url = FindEntity(EntityCategory.Url)                
-            };
-
-            var timeEntities = entities.Where(e => e.Category == EntityCategory.DateTime)
-                .ToList();
-            // TODO: convert to start and end time
-
-            var addressString = FindEntity(EntityCategory.Address);
-            // TODO: convert to address class and assign to location
+            mbEvent = converter.ConvertToEvent(entities);
 
             var newId = await repository.CreateAsync(mbEvent);
             mbEvent.Id = newId;

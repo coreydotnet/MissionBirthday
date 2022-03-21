@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MissionBirthday.Contracts;
 using MissionBirthday.Contracts.Models;
 using MissionBirthday.Contracts.AzureAi;
 using MissionBirthday.Contracts.Repositories;
-using MissionBirthday.Logic;
 using MissionBirthday.Logic.AzureAi;
 using MissionBirthday.Persistence.Repositories;
+using MissionBirthday.Contracts.Events;
+using MissionBirthday.Logic.Events;
 
 namespace MissionBirthday.Api
 {
@@ -29,6 +29,7 @@ namespace MissionBirthday.Api
             // Singletons
             services.AddSingleton<IOcrService, OcrService>();
             services.AddSingleton<IEntityExtractionService, EntityExtractionService>();
+            services.AddSingleton<IEntitiesToEventConverter, EntitiesToEventConverter>();
 
             // Scoped (usually require a DB repository)
             services.AddScoped<IEventService, EventService>();

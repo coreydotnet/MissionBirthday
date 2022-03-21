@@ -23,7 +23,7 @@ namespace MissionBirthday.Contracts.Models
         public string Details { get; set; }
 
         [Required]
-        public Address Location { get; set; } = new Address();
+        public Address Location { get; set; }
 
         /// <summary>
         /// Date of the event and start time of day in local timezone.
