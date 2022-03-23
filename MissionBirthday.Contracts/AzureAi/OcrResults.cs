@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MissionBirthday.Contracts.Ocr
+namespace MissionBirthday.Contracts.AzureAi
 {
     public class OcrResults
     {

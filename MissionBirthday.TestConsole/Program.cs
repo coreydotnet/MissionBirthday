@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MissionBirthday.Contracts.Models;
-using MissionBirthday.Logic.Ocr;
+using MissionBirthday.Logic.AzureAi;
+using MissionBirthday.Logic.Events;
+using Newtonsoft.Json;
 
 namespace MissionBirthday.TestConsole
 {
@@ -11,10 +14,14 @@ namespace MissionBirthday.TestConsole
     {
         static async Task Main(string[] args)
         {
-            await TestOcr();
+            using var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder//.AddFilter("MissionBirthday.TestConsole.Program", LogLevel.Debug)
+                    .AddConsole();                
+            });
 
-            Console.WriteLine("Press enter to quit");
-            Console.ReadLine();
+            //await TestOcr();
+            await TestLanguage(loggerFactory.CreateLogger<EntityExtractionService>());
         }
 
         private static async Task TestOcr()
@@ -34,6 +41,45 @@ namespace MissionBirthday.TestConsole
 
             foreach (var line in results.TextLines)
                 Console.WriteLine(line);
+        }
+
+        private static async Task TestLanguage(ILogger<EntityExtractionService> logger)
+        {
+            const string document = @"
+St. Vincent de Paul
+Food Donations
+1103 NE Elm St
+Klamath Falls, OR 97754
+Contact us at: 775-555-2354 or visit us online at www.sierrabiblechurch.org
+Here's what to bring:
+- peanut butter
+- jelly
+- bread
+- chili
+- soup
+- bottled water";
+
+            var service = new EntityExtractionService(logger, Options.Create(
+                new LanguageServiceOptions
+                {
+                    MbLanguageEndpoint = "https://mb-language.cognitiveservices.azure.com/",
+                    MbLanguageKey = "Insert Key Here"    // NOTE: do not check in with actual key
+                }));
+
+            var result = await service.AnalyzeAsync(document);
+
+            foreach (var entity in result)
+            {
+                Console.WriteLine($"{entity.Category} ({entity.SubCategory}), score={entity.ConfidenceScore}, text={entity.Text}");
+            }
+
+            var converter = new EntitiesToEventConverter();
+            var mbEvent = converter.ConvertToEvent(result);
+
+            var jsonString = JsonConvert.SerializeObject(mbEvent, Formatting.Indented);
+
+            Console.WriteLine("Converted Event:");
+            Console.WriteLine(jsonString);
         }
     }
 }
