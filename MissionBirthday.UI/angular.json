@@ -32,6 +32,7 @@
               }
             ],
             "styles": [
+              "projects/mb-mobile/src/theme/variables.scss",
               "projects/mb-mobile/src/styles.scss",
               {
                 "input": "node_modules/@ionic/angular/css/normalize.css"
@@ -59,9 +60,6 @@
               },
               {
                 "input": "node_modules/@ionic/angular/css/flex-utils.css"
-              },
-              {
-                "input": "projects/mb-mobile/src/theme/variables.css"
               }
             ],
             "scripts": []

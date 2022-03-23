@@ -1,0 +1,12 @@
+:host {
+    height: 100%;
+}
+
+form {
+    margin-top: 7rem;
+    display: flex;
+    align-self: center;
+    ion-input {
+        width: 22rem;
+    }
+}

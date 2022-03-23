@@ -1,0 +1,9 @@
+<form [formGroup]="searchForm">
+    <ion-input type="search" formControlName="zipCode"
+        placeholder="Enter your zip code to find nearby resources"></ion-input>
+    <button>
+        <ion-icon name="search-outline" (click)="search()"></ion-icon>
+    </button>
+</form>
+<!-- For Cory to update -->
+<ion-button (click)="addResource()">Add a resource</ion-button>
