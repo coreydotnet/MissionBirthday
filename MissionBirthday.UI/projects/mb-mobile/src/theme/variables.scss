@@ -78,6 +78,18 @@
     --ion-color-light-contrast-rgb: 0, 0, 0;
     --ion-color-light-shade: #d7d8da;
     --ion-color-light-tint: #f5f6f9;
+
+    // Needs to be in root to take effect everywhere
+    ion-input {
+        --placeholder-color: white;
+        --placeholder-opacity: 1;
+        --background: #595959; // Won't read the color variable???
+    }
+
+    ion-button {
+        --background: #0DD7FF;
+        --color: black;
+    }
   }
   
   @media (prefers-color-scheme: dark) {
@@ -236,12 +248,5 @@
       --ion-tab-bar-background: #1f1f1f;
   
       --ion-card-background: #1e1e1e;
-    }
-
-    ion-input {
-        // Somehow this selector isn't specific enough? It's a hackathon anyways :)
-        --placeholder-color: white !important;
-        --placeholder-opacity: 1 !important;
-        --background: #595959 !important; // Won't read the color variable???
     }
   }

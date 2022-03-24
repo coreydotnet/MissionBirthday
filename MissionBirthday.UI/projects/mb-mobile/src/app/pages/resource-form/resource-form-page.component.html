@@ -1,1 +1,59 @@
-<p>resource-form-page works!</p>
+<h4>Submit information for a new resource</h4>
+<h4>Autofill - If you have the information in a flyer or document you can take a picture and we will fill in the data</h4>
+
+<div class="upload-buttons">
+    <ion-button type="button">Autofill</ion-button>
+</div>
+
+<form class="form-container"  [formGroup]="resourceForm" (ngSubmit)="addEvent()">
+    <strong class="grid-span">Resource Information</strong>
+    <label>Phone Number: </label>
+    <ion-input type="tel" formControlName="phoneNumber"></ion-input>
+
+    <label>Email: </label>
+    <ion-input type="email" formControlName="email"></ion-input>
+
+    <label>Website: </label>
+    <ion-input type="url" formControlName="url"></ion-input>
+
+    <label>Food Bank Name: </label>
+    <ion-input type="text" formControlName="organization"></ion-input>
+
+    <strong class="grid-span">Location</strong>
+    <div formGroupName="location" style="display:contents">
+        <label>Address: </label>
+        <ion-input type="text" formControlName="street1"></ion-input>
+
+        <label>Address Line 2: </label>
+        <ion-input type="text" formControlName="street2"></ion-input>
+
+        <label>City: </label>
+        <ion-input type="text" formControlName="city"></ion-input>
+
+        <label>State: </label>
+        <ion-input type="text" formControlName="state"></ion-input>
+
+        <label>Zip Code: </label>
+        <ion-input type="text" formControlName="zip"></ion-input>
+    </div>
+
+    <strong class="grid-span">Event Info</strong>
+    <label>Hours: </label>
+    <ion-input type="text" formControlName="hours"></ion-input>
+
+    <label>Details: </label>
+    <ion-input type="text" formControlName="details"></ion-input>
+
+    <p class="grid-span">Items Available:</p>
+    <div class="grid-span items-grid">
+        <ng-container *ngFor="let item of resourceForm.controls.items.value; let i = index">
+            <p>{{item}}</p>
+            <button class="icon-button delete" (click)="removeItem(i)"><ion-icon name="close-outline"></ion-icon></button>
+        </ng-container>
+
+        <ion-input type="text" #newItem></ion-input>
+        <button class="icon-button add" (click)="addItem(newItem)"><ion-icon name="add-outline"></ion-icon></button>
+    </div>
+
+    <ion-button type="submit" class="grid-span" style="justify-self:flex-end">Submit</ion-button>
+</form>
