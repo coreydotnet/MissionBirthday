@@ -35,6 +35,9 @@ namespace MissionBirthday.Api
             using var scope = services.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<MbDataContext>();
             db.Database.Migrate();
+
+            var dbInitizer = new TestDataInitializer(db);
+            dbInitizer.Initialize();
         }
     }
 }
