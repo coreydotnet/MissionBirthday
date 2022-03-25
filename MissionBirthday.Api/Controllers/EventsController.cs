@@ -17,13 +17,13 @@ namespace MissionBirthday.Api.Controllers
     public class EventsController : ControllerBase
     {
         private long MaxImageBytes = 6 * 1024 * 1024;
-        private readonly ILogger<EventsController> _logger;
+        private readonly ILogger<EventsController> logger;
         private readonly IEventRepository repository;
         private readonly IEventService eventService;
 
         public EventsController(ILogger<EventsController> logger, IEventRepository repository, IEventService eventService)
         {
-            _logger = logger;
+            this.logger = logger;
             this.repository = repository;
             this.eventService = eventService;
         }
@@ -55,14 +55,23 @@ namespace MissionBirthday.Api.Controllers
 
             // TODO: Validate: JPEG, PNG, BMP, PDF, and TIFF
 
-            using var imageStream = new MemoryStream();
-            await file.CopyToAsync(imageStream);
-            imageStream.Position = 0;
+            try
+            {
 
-            var mbEvent = await eventService.CreateEventFromImageAsync(imageStream);
-            return mbEvent != null
-                ? Ok(mbEvent)
-                : UnprocessableEntity();
+                using var imageStream = new MemoryStream();
+                await file.CopyToAsync(imageStream);
+                imageStream.Position = 0;
+
+                var mbEvent = await eventService.CreateEventFromImageAsync(imageStream);
+                return mbEvent != null
+                    ? Ok(mbEvent)
+                    : UnprocessableEntity();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, $"Failed to upload an image: ContentDisposition={file.ContentDisposition}; ContentType={file.ContentType}; Length={file.Length}");
+                return UnprocessableEntity();
+            }
         }
 
         [HttpPost()]
