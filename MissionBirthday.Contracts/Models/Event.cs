@@ -14,6 +14,9 @@ namespace MissionBirthday.Contracts.Models
         [Required]
         public string Organization { get; set; } = string.Empty;
 
+        [Required]
+        public string Title { get; set; } = string.Empty;
+
         public string PhoneNumber { get; set; }
 
         public string Email { get; set; }
@@ -22,15 +25,14 @@ namespace MissionBirthday.Contracts.Models
 
         public string Details { get; set; }
 
+        public string Date { get; set; }
+
+        public string Time { get; set; }
+
         [Required]
         public Address Location { get; set; }
 
-        /// <summary>
-        /// Date of the event and start time of day in local timezone.
-        /// </summary>
-        public DateTimeOffset StartTime { get; set; }
-
-        // Date of event and the end time of day in local timezone.
-        public DateTimeOffset EndTime { get; set; }
+        [Required]
+        public IList<string> Items { get; set; }
     }
 }

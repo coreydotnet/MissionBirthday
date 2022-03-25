@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MissionBirthday.Persistence.Db
 {
-    public class Address
+    public class Address : IMapToApi<Contracts.Models.Address>
     {
         public int Id { get; set; }
 
@@ -20,7 +20,7 @@ namespace MissionBirthday.Persistence.Db
 
         public string Zip { get; set; }
 
-        internal Contracts.Models.Address ToApi()
+        public Contracts.Models.Address ToApi()
         {
             return new Contracts.Models.Address
             {
@@ -32,7 +32,7 @@ namespace MissionBirthday.Persistence.Db
             };
         }
 
-        internal void CopyFromApi(Contracts.Models.Address obj)
+        public void CopyFromApi(Contracts.Models.Address obj)
         {
             Street1 = obj.Street1;
             Street2 = obj.Street2;

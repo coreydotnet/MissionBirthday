@@ -26,6 +26,8 @@ namespace MissionBirthday.Contracts.AzureAi
         public string SubCategory { get; }
         
         public double ConfidenceScore { get; }
+
+        public override string ToString() => $"{Text}, {Category}{(!string.IsNullOrEmpty(SubCategory) ? $" - {SubCategory}" : "")}, {ConfidenceScore}";
     }
 
     public static class EntityExtensions

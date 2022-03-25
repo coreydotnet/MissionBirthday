@@ -20,7 +20,8 @@ namespace MissionBirthday.Logic.Events
                 PhoneNumber = FindCategory(entities, EntityCategory.PhoneNumber).TextOrDefault(),
                 Email = FindCategory(entities, EntityCategory.Email).TextOrDefault(),
                 Url = FindCategory(entities, EntityCategory.Url).TextOrDefault(),
-                Details = string.Join(Environment.NewLine, entities.Where(e => e.Category == EntityCategory.Product).Select(e => e.Text)),
+                Details = "",
+                Items = entities.Where(e => e.Category == EntityCategory.Product).Select(e => e.Text).ToArray(),
                 Location = CreateAddress(entities)
             };
 

@@ -11,14 +11,12 @@ namespace MissionBirthday.Logic.Events
 {
     public class EventService : IEventService
     {
-        private readonly IEventRepository repository;
         private readonly IOcrService ocrService;
         private readonly IEntityExtractionService entityExtractionService;
         private readonly IEntitiesToEventConverter converter;
 
-        public EventService(IEventRepository repository, IOcrService ocrService, IEntityExtractionService entityExtractionService, IEntitiesToEventConverter converter)
+        public EventService(IOcrService ocrService, IEntityExtractionService entityExtractionService, IEntitiesToEventConverter converter)
         {
-            this.repository = repository;
             this.ocrService = ocrService;
             this.entityExtractionService = entityExtractionService;
             this.converter = converter;
@@ -26,15 +24,9 @@ namespace MissionBirthday.Logic.Events
 
         public async Task<EventDocument> CreateEventFromImageAsync(Stream imageStream)
         {
-            Event mbEvent = null;
-
             var document = await ReadDocumentAsync(imageStream);
             var entities = await entityExtractionService.AnalyzeAsync(document);
-            mbEvent = converter.ConvertToEvent(entities);
-
-            var newId = await repository.CreateAsync(mbEvent);
-            mbEvent.Id = newId;
-
+            var mbEvent = converter.ConvertToEvent(entities);
             return new EventDocument(document, mbEvent);
         }
 

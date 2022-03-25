@@ -28,8 +28,8 @@ namespace MissionBirthday.Api.Controllers
             this.eventService = eventService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        [HttpGet("search/{zipCode}")]
+        public async Task<IActionResult> SearchByZipCodeAsync(string zipCode)
         {
             return Ok(await repository.GetAllAsync());
         }
