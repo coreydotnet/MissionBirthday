@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { map, switchMap } from 'rxjs';
+import { AdminApiService } from '../../services/admin-api.service';
+import { CameraService } from '../../services/camera.service';
 
 @Component({
   selector: 'app-resource-form-page',
@@ -9,11 +13,14 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class ResourceFormPageComponent implements OnInit {
   public resourceForm: FormGroup;
 
-  constructor() { }
+  constructor(private readonly camera: CameraService,
+    private readonly adminApi: AdminApiService,
+    private readonly router: Router) { }
 
   ngOnInit(): void {
     this.resourceForm = new FormGroup({
       organization: new FormControl(),
+      title: new FormControl('', Validators.required),
       phoneNumber: new FormControl(),
       email: new FormControl(),
       url: new FormControl(),
@@ -24,7 +31,8 @@ export class ResourceFormPageComponent implements OnInit {
         state: new FormControl(),
         zip: new FormControl()
       }),
-      hours: new FormControl(),
+      date: new FormControl(),
+      time: new FormControl(),
       details: new FormControl(),
       items: new FormControl([])
     })
@@ -41,6 +49,20 @@ export class ResourceFormPageComponent implements OnInit {
   }
 
   addEvent(): void {
-    
+    if (this.resourceForm.valid) {
+      this.adminApi.createEvent(this.resourceForm.getRawValue()).subscribe(() => {
+        this.router.navigate(['..']);
+      });
+    }
+  }
+
+  getFieldsFromImage(): void {
+    this.camera.takePicture().pipe(
+      map(image => this.camera.getPhotoBlob(image)),
+      switchMap(blob => this.adminApi.uploadForOcr(blob))
+    ).subscribe(parsedEvent => {
+      console.log(parsedEvent)
+      this.resourceForm.patchValue(parsedEvent);
+    });
   }
 }

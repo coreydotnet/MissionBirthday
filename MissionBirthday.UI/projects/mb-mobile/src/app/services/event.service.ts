@@ -11,6 +11,6 @@ export class EventService {
   constructor(private readonly http: HttpClient) { }
 
   public getAreaEvents(zip: string): Observable<CharityEvent[]> {
-    return this.http.get<CharityEvent[]>('/api/Events');
+    return this.http.get<CharityEvent[]>(`/api/Events/search/${zip}`);
   }
 }

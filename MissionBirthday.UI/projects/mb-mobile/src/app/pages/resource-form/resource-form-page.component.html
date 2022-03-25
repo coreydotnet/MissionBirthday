@@ -2,7 +2,7 @@
 <h4>Autofill - If you have the information in a flyer or document you can take a picture and we will fill in the data</h4>
 
 <div class="upload-buttons">
-    <ion-button type="button">Autofill</ion-button>
+    <ion-button type="button" (click)="getFieldsFromImage()">Autofill</ion-button>
 </div>
 
 <form class="form-container"  [formGroup]="resourceForm" (ngSubmit)="addEvent()">
@@ -38,13 +38,19 @@
     </div>
 
     <strong class="grid-span">Event Info</strong>
-    <label>Hours: </label>
-    <ion-input type="text" formControlName="hours"></ion-input>
+    <label>* Title: </label>
+    <ion-input type="text" formControlName="title"></ion-input>
+
+    <label>Date: </label>
+    <ion-input type="text" formControlName="date"></ion-input>
+
+    <label>Time: </label>
+    <ion-input type="text" formControlName="time"></ion-input>
 
     <label>Details: </label>
     <ion-input type="text" formControlName="details"></ion-input>
 
-    <p class="grid-span">Items Available:</p>
+    <strong class="grid-span">Items Available:</strong>
     <div class="grid-span items-grid">
         <ng-container *ngFor="let item of resourceForm.controls.items.value; let i = index">
             <p>{{item}}</p>
