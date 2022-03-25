@@ -1,0 +1,12 @@
+<h4>Resource Search Results</h4>
+<div *ngFor="let event of event$ | async" class="event-container">
+    <h5>{{event.organization}}</h5>
+    <div>
+        <p>{{event.location.street1}}</p>
+        <p *ngIf="event.location.street2">{{event.location.street2}}</p>
+        <p>{{event.location.city}}, {{event.location.state}} {{event.location.zip }}</p>
+    </div>
+    <p>{{event.hours}}</p>
+
+    <p>{{event.details}}</p>
+</div>

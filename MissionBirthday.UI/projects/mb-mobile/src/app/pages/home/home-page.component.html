@@ -1,0 +1,17 @@
+<form [formGroup]="searchForm" (ngSubmit)="search()">
+    <ion-input type="search" formControlName="zipCode"
+        placeholder="Enter your zip code to find nearby resources"></ion-input>
+    <button type="submit">
+        <ion-icon name="search-outline"></ion-icon>
+    </button>
+</form>
+
+<ion-card>
+    <ion-card-header>
+        <!-- For Corey to make look like a link -->
+        <ion-card-title><a routerLink="/add-resource">Add a Resource</a></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        If your organization provides food or infant supplies through a community program or food bank you can submit your information to Mission Birthday to be included in our resource search.
+    </ion-card-content>
+</ion-card>

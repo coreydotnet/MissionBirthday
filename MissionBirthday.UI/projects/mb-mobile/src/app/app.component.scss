@@ -1,0 +1,24 @@
+@import '../theme/colors.scss';
+
+ion-app {
+    align-items: center;
+}
+
+ion-router-outlet {
+    flex: 1;
+    min-height: 0;
+    position: unset;
+    width: 100%;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+h4 {
+    font-size: large;
+}
+
+h1, h4 {
+    color: $title-text;
+}
