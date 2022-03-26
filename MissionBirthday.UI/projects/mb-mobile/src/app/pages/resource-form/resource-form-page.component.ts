@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, switchMap } from 'rxjs';
+import { IonModal, LoadingController } from '@ionic/angular';
+import { from, map, shareReplay, switchMap, tap, withLatestFrom } from 'rxjs';
 import { AdminApiService } from '../../services/admin-api.service';
 import { CameraService } from '../../services/camera.service';
+import { SampleDataService } from './sample-image-picker/sample-data.service';
 
 @Component({
   selector: 'app-resource-form-page',
@@ -13,9 +15,12 @@ import { CameraService } from '../../services/camera.service';
 export class ResourceFormPageComponent implements OnInit {
   public resourceForm: FormGroup;
   public locationGroup: FormGroup;
+  @ViewChild(IonModal) public  sampleModal;
 
   constructor(private readonly camera: CameraService,
     private readonly adminApi: AdminApiService,
+    private readonly sampleData: SampleDataService,
+    private readonly loadingController: LoadingController,
     private readonly router: Router) { }
 
   ngOnInit(): void {
@@ -61,12 +66,34 @@ export class ResourceFormPageComponent implements OnInit {
   }
 
   getFieldsFromImage(): void {
-    this.camera.takePicture().pipe(
+    const spinner$ = from(this.loadingController.create()).pipe(
+      shareReplay()
+    );
+    spinner$.pipe(
+      tap(spinner => spinner.present()),
+      switchMap(() => this.camera.takePicture()),
       map(image => this.camera.getPhotoBlob(image)),
-      switchMap(blob => this.adminApi.uploadForOcr(blob))
-    ).subscribe(parsedEvent => {
-      console.log(parsedEvent)
+      switchMap(blob => this.adminApi.uploadForOcr(blob)),
+      withLatestFrom(spinner$)
+    ).subscribe(([parsedEvent, spinner]) => {
       this.resourceForm.patchValue(parsedEvent);
+      spinner.dismiss();
+    });
+  }
+
+  public autofillSample(key: string) {
+    this.sampleModal.dismiss();
+    const spinner$ = from(this.loadingController.create()).pipe(
+      shareReplay()
+    );
+
+    spinner$.pipe(
+      tap(spinner => spinner.present()),
+      switchMap(() => this.sampleData.getSampleEventData(key)),
+      withLatestFrom(spinner$)
+    ).subscribe(([parsedEvent, spinner]) => {
+      this.resourceForm.patchValue(parsedEvent);
+      spinner.dismiss();
     });
   }
 }

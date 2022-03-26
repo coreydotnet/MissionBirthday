@@ -1,0 +1,11 @@
+:host {
+    padding: 1rem;
+}
+.image-grid {
+    display: flex;
+    gap: 1rem;
+    img {
+        height: 20rem;
+        width: 15rem;
+    }
+}

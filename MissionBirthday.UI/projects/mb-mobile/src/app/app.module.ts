@@ -12,6 +12,7 @@ import { ResourceFormPageComponent } from './pages/resource-form/resource-form-p
 import { ReactiveFormsModule } from '@angular/forms';
 import { ItemListPipe } from './pages/search-results/pipes/item-list.pipe';
 import { DataAdminPageComponent } from './pages/data-admin-page/data-admin-page.component';
+import { SampleImagePickerComponent } from './pages/resource-form/sample-image-picker/sample-image-picker.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DataAdminPageComponent } from './pages/data-admin-page/data-admin-page.
     SearchResultsPageComponent,
     ResourceFormPageComponent,
     ItemListPipe,
-    DataAdminPageComponent
+    DataAdminPageComponent,
+    SampleImagePickerComponent
   ],
   imports: [
     HttpClientModule,

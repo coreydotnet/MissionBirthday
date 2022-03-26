@@ -1,0 +1,8 @@
+<h4>Click an image to select it:</h4>
+<div class="image-grid">
+    <div *ngFor="let image of samples$ | async"
+        (click)="imageSelected.emit(image.key)">
+        <p>{{image.name}}</p>
+        <img [src]="image.sourcePath"/>
+    </div>
+</div>

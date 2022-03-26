@@ -3,6 +3,7 @@
 
 <div class="upload-buttons">
     <ion-button type="button" (click)="getFieldsFromImage()">Autofill</ion-button>
+    <ion-button type="button" id="sample-button">Autofill from Sample Image</ion-button>
 </div>
 
 <form class="form-container"  [formGroup]="resourceForm" (ngSubmit)="addEvent()">
@@ -78,3 +79,11 @@
 
     <ion-button type="submit" class="grid-span" style="justify-self:flex-end">Submit</ion-button>
 </form>
+
+<ion-modal trigger="sample-button"
+    [showBackdrop]="true"
+    [swipeToClose]="false">
+    <ng-template>
+        <app-sample-image-picker (imageSelected)="autofillSample($event)"></app-sample-image-picker>
+    </ng-template>
+</ion-modal>
