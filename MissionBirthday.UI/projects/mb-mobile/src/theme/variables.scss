@@ -101,6 +101,7 @@
      */
   
     body {
+      --ion-background-color: #262626;
       --ion-color-primary: #428cff;
       --ion-color-primary-rgb: 66,140,255;
       --ion-color-primary-contrast: #ffffff;
@@ -171,7 +172,7 @@
      */
   
     .ios body {
-      --ion-background-color: $page-background;
+      --ion-background-color: #262626;
       --ion-background-color-rgb: 38,38,38;
   
       --ion-text-color: #ffffff;
@@ -215,7 +216,7 @@
      */
   
     .md body {
-      --ion-background-color: $page-background;
+      --ion-background-color: #262626;
       --ion-background-color-rgb: 38,38,38;
   
       --ion-text-color: #ffffff;
