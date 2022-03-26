@@ -55,6 +55,10 @@ namespace MissionBirthday.Api
 
             app.UseHttpsRedirection();
 
+            var fileOptions = new FileServerOptions();
+            fileOptions.DefaultFilesOptions.DefaultFileNames.Add("index.html");
+            app.UseFileServer(fileOptions);
+
             app.UseRouting();
 
             app.UseAuthorization();
