@@ -31,12 +31,14 @@ For local development, endpoints and API keys are needed for Computer Vision and
 2. Replace the contents of `secrets.json` with the following:
 ```
 {
-  "OcrOptions:DocReaderKey": "<mb-docReader key>",
-  "LanguageServiceOptions:MbLanguageKey": "<mb-language key>"
+  "OcrOptions:DocReaderKey": "<Computer Vision key>",
+  "LanguageServiceOptions:MbLanguageKey": "<Language key>",
+  "HoundBotOptions:DirectLineSecret": "<Direct Line Secret>"
 }
 ```
-3. Replace `<mb-docReader key>` with a key from an Azure Computer Vision resource (ex. `MissionBirthdayRG` > `mb-docReader` > `Keys and Endpoint`).
-4. Replace `<mb-language key>` with a key from an Azure Language resource (ex. `MissionBirthdayRG` > `mb-language` > `Keys and Endpoint`).
+3. Replace `<...>` with a key from an Azure Computer Vision resource (ex. `MissionBirthdayRG` > `mb-docReader` > `Keys and Endpoint`).
+4. Replace `<...` with a key from an Azure Language resource (ex. `MissionBirthdayRG` > `mb-language` > `Keys and Endpoint`).
+5. Replace `<...>` with a secret from an Azure Bot resource (ex. `mb-hBot` > `Channels` > `Direct Line` > `mb-website` > `Secret Keys`).
 5. Save and close `secrets.json`.
 
 # Contribute
