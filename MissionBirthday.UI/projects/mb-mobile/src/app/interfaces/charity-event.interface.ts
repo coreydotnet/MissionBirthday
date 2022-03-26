@@ -5,7 +5,9 @@ export interface CharityEvent {
     email: string;
     url: string;
     location: Address;
-    hours: string;
+    title: string;
+    date: string;
+    time: string;
     details: string;
 
     items: string[];

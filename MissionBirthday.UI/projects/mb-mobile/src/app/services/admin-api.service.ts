@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, mapTo, Observable } from 'rxjs';
 import { CharityEvent } from '../interfaces/charity-event.interface';
 
 @Injectable({
@@ -14,6 +14,14 @@ export class AdminApiService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post<CharityEvent>("/api/Events/upload", formData);
+    return this.http.post<{ event: CharityEvent }>("/api/Events/upload", formData).pipe(
+      map(response => response.event)
+    );
+  }
+
+  public createEvent(event: CharityEvent): Observable<void> {
+    return this.http.post('/api/Events', event).pipe(
+      mapTo(null)
+    );
   }
 }
