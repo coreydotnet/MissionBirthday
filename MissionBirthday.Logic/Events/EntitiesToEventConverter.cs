@@ -11,17 +11,21 @@ namespace MissionBirthday.Logic.Events
     {
         public Event ConvertToEvent(ICollection<Entity> entities)
         {
-            var organization = FindCategory(entities, EntityCategory.Organization)
-                ?? entities.Where(e => e.Category == EntityCategory.Location && !e.IsGpeLocation()).FirstOrDefault();
+            var organization = FindCategory(entities, EntityCategory.Organization, .5)
+                ?? entities.Where(e => e.Category == EntityCategory.Location && !e.IsGpeLocation()).FirstOrDefault()
+                ?? FindCategory(entities, EntityCategory.Organization);
 
             var mbEvent = new Event()
             {
                 Organization = organization.TextOrDefault(),
+                Title = FindCategory(entities, EntityCategory.Event).TextOrDefault(),
                 PhoneNumber = FindCategory(entities, EntityCategory.PhoneNumber).TextOrDefault(),
                 Email = FindCategory(entities, EntityCategory.Email).TextOrDefault(),
                 Url = FindCategory(entities, EntityCategory.Url).TextOrDefault(),
                 Details = "",
                 Items = entities.Where(e => e.Category == EntityCategory.Product).Select(e => e.Text).ToArray(),
+                Date = string.Join(", ", entities.Where(e => e.IsDateOrDateRange()).Select(e => e.Text)),
+                Time = string.Join(", ", entities.Where(e => e.IsTimeOrTimeRange()).Select(e => e.Text)),
                 Location = CreateAddress(entities)
             };
 
@@ -55,9 +59,9 @@ namespace MissionBirthday.Logic.Events
             return address;
         }
 
-        private Entity FindCategory(ICollection<Entity> entities, EntityCategory category)
+        private Entity FindCategory(ICollection<Entity> entities, EntityCategory category, double minConfidence = 0)
         {
-            return entities.FirstOrDefault(e => e.Category == category);
+            return entities.FirstOrDefault(e => e.Category == category && e.ConfidenceScore >= minConfidence);
         }
     }
 }
