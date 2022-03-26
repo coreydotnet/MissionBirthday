@@ -10,6 +10,12 @@ h4 {
     margin: 2rem;
 }
 
+.event-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
 .event-container {
     border: 2px solid $box-border;
     color: white;

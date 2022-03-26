@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mb-mobile",
+            "outputPath": "../MissionBirthday.Api/App",
             "index": "projects/mb-mobile/src/index.html",
             "main": "projects/mb-mobile/src/main.ts",
             "polyfills": "projects/mb-mobile/src/polyfills.ts",
@@ -75,7 +75,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,

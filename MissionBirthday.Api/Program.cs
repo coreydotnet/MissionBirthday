@@ -27,6 +27,7 @@ namespace MissionBirthday.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseWebRoot(@"App");
                     webBuilder.UseStartup<Startup>();
                 });
 

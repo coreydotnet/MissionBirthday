@@ -1,0 +1,14 @@
+<h4>Data Administration</h4>
+<div class="table-root">
+    <strong class="header">Food Bank</strong>
+    <strong class="header">Event Title</strong>
+    <strong class="header">Date</strong>
+    <strong class="header"><!-- Empty for delete button --></strong>
+
+    <ng-container *ngFor="let event of events$ | async">
+        <span>{{event.organization}}</span>
+        <span>{{event.title}}</span>
+        <span>{{event.date}}</span>
+        <button class="icon-button delete" (click)="removeEvent(event.id)"><ion-icon name="close-outline"></ion-icon></button>
+    </ng-container>
+</div>

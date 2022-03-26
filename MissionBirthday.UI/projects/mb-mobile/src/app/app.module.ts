@@ -10,13 +10,17 @@ import { HomePageComponent } from './pages/home/home-page.component';
 import { SearchResultsPageComponent } from './pages/search-results/search-results-page.component';
 import { ResourceFormPageComponent } from './pages/resource-form/resource-form-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ItemListPipe } from './pages/search-results/pipes/item-list.pipe';
+import { DataAdminPageComponent } from './pages/data-admin-page/data-admin-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     SearchResultsPageComponent,
-    ResourceFormPageComponent
+    ResourceFormPageComponent,
+    ItemListPipe,
+    DataAdminPageComponent
   ],
   imports: [
     HttpClientModule,

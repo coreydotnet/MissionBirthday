@@ -7,3 +7,20 @@ html {
         height: 100%;
     }
 }
+
+.icon-button {
+    background-color: transparent;
+
+    ion-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    &.add ion-icon {
+        color: lime;
+    }
+
+    &.delete ion-icon {
+        color: red;
+    }
+}
