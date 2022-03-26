@@ -11,5 +11,7 @@ namespace MissionBirthday.Contracts.Events
     public interface IEventService
     { 
         Task<EventDocument> CreateEventFromImageAsync(Stream imageStream);
+
+        Task<ICollection<Event>> GetAllAsync(string zipCode);
     }
 }

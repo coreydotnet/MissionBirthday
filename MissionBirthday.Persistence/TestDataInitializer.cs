@@ -89,23 +89,6 @@ namespace MissionBirthday.Persistence
                 },
                 new Event
                 {
-                    Organization = "Prineville Soroptimist Senior Center",
-                    Title = "",
-                    PhoneNumber = "541-447-6844",
-                    Url = "https://www.facebook.com/prineville.senior.center/",
-                    Date = "Monday-Friday",
-                    Time = "TEMPORARILY CLOSED. Lunch, 12:00pm",
-                    Details = @"Lunch & Home Delivery (within a 5 mile radius of senior center) to seniors (60 and above) in need.",
-                    Address = new Address
-                    {
-                        Street1 = "180 NE Belknap Street",
-                        City = "Prineville",
-                        State = "OR",
-                        Zip = "97754"
-                    }
-                },
-                new Event
-                {
                     Organization = "St. Vincent De Paul – Prineville",
                     Title = "",
                     PhoneNumber = "(541) 447-7662",
