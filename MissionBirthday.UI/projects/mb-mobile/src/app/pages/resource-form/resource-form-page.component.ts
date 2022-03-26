@@ -28,7 +28,7 @@ export class ResourceFormPageComponent implements OnInit {
       location: new FormGroup({
         street1: new FormControl(),
         street2: new FormControl(),
-        city: new FormControl(),
+        city: new FormControl('', Validators.required),
         state: new FormControl('', [Validators.required, Validators.minLength(2)]),
         zip: new FormControl('', [Validators.required, Validators.minLength(5)])
       }),
