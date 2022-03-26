@@ -37,7 +37,10 @@ namespace MissionBirthday.Api.Controllers
         [HttpGet("search/{zipCode}")]
         public async Task<IActionResult> SearchByZipCodeAsync(string zipCode)
         {
-            return Ok(await repository.GetAllAsync());
+            if (string.IsNullOrWhiteSpace(zipCode))
+                return BadRequest();
+
+            return Ok(await eventService.GetAllAsync(zipCode));
         }
 
         [HttpGet("{id}")]

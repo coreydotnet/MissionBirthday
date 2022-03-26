@@ -22,7 +22,7 @@ namespace MissionBirthday.Persistence.Repositories
         {
             return await QueryEvents()
                 .AsNoTracking()
-                //.OrderBy(e => e.StartTime)
+                .OrderBy(e => e.Organization)
                 .Select(e => e.ToApi())
                 .ToArrayAsync();
         }

@@ -12,9 +12,11 @@ TODO: Guide users through getting your code up and running on their own system. 
 TODO: Describe and show how to build your code and run the tests. 
 
 ## User Secrets
-API keys and connection string credentials should not be checked into source control.
+Note: API keys and connection string credentials should not be checked into source control.
 
-1. Right-click `MissionBirthday.Api` and choose Manage User Secrets
+For local development, endpoints and API keys are needed for Computer Vision and Language Service. Endpoints are found in `appsettings.json`.
+
+1. Right-click `MissionBirthday.Api` and choose Manage User Secrets.
 2. Replace the contents of `secrets.json` with the following:
 ```
 {
@@ -22,8 +24,8 @@ API keys and connection string credentials should not be checked into source con
   "LanguageServiceOptions:MbLanguageKey": "<mb-language key>"
 }
 ```
-3. Replace `<mb-docReader key>` with key 1 from Azure resources (`MissionBirthdayRG` > `mb-docReader` > `Keys and Endpoint`).
-4. Replace `<mb-language key>` with key 1 from Azure resources (`MissionBirthdayRG` > `mb-language` > `Keys and Endpoint`).
+3. Replace `<mb-docReader key>` with a key from an Azure Computer Vision resource (ex. `MissionBirthdayRG` > `mb-docReader` > `Keys and Endpoint`).
+4. Replace `<mb-language key>` with a key from an Azure Language resource (ex. `MissionBirthdayRG` > `mb-language` > `Keys and Endpoint`).
 5. Save and close `secrets.json`.
 
 # Contribute
