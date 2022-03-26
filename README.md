@@ -9,7 +9,18 @@ TODO: Guide users through getting your code up and running on their own system. 
 4.	API references
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+
+## Frontend Angular
+Prereqs: install NodeJS and NPM
+
+1. Open `MissionBirthday.UI` directory in PowerShell or a command line
+2. Run `npm install`
+3. Run `ng build hound-bot`
+4. Run `ng build` or `ng build --watch`
+
+## Visual Studio
+
+1. Run MissionBirth.Api
 
 ## User Secrets
 Note: API keys and connection string credentials should not be checked into source control.

@@ -54,6 +54,7 @@ namespace MissionBirthday.Api.Controllers
         }
 
         [HttpPost("upload")]
+        [ProducesResponseType(200, Type = typeof(EventDocument))]
         public async Task<IActionResult> PostUploadAsync(IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -83,7 +84,7 @@ namespace MissionBirthday.Api.Controllers
             }
         }
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody]Event mbEvent)
         {
             if (mbEvent == null)
