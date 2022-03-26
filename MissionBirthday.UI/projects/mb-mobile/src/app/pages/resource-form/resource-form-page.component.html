@@ -31,7 +31,10 @@
         <ion-input type="text" formControlName="street2"></ion-input>
 
         <label>City: </label>
-        <ion-input type="text" formControlName="city"></ion-input>
+        <div>
+            <ion-input type="text" formControlName="city"></ion-input>
+            <span style="color: red" *ngIf="locationGroup.controls.city.errors && locationGroup.controls.city.touched">City is required</span>
+        </div>
 
         <label>State: </label>
         <div>
