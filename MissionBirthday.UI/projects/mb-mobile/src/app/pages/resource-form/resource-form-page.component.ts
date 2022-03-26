@@ -53,6 +53,8 @@ export class ResourceFormPageComponent implements OnInit {
       this.adminApi.createEvent(this.resourceForm.getRawValue()).subscribe(() => {
         this.router.navigate(['..']);
       });
+    } else {
+      this.resourceForm.markAllAsTouched();
     }
   }
 

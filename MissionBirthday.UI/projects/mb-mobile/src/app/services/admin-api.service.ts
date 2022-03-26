@@ -24,4 +24,14 @@ export class AdminApiService {
       mapTo(null)
     );
   }
+
+  public getAllEvents(): Observable<CharityEvent[]> {
+    return this.http.get<CharityEvent[]>('api/Events');
+  }
+
+  public deleteEvent(id: number): Observable<void> {
+    return this.http.delete(`/api/Events/${id}`).pipe(
+      mapTo(null)
+    );
+  }
 }

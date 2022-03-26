@@ -39,7 +39,10 @@
 
     <strong class="grid-span">Event Info</strong>
     <label>* Title: </label>
-    <ion-input type="text" formControlName="title"></ion-input>
+    <div>
+        <ion-input type="text" formControlName="title"></ion-input>
+        <span style="color: red" *ngIf="resourceForm.controls.title.errors && resourceForm.controls.title.touched">Title is required</span>
+    </div>
 
     <label>Date: </label>
     <ion-input type="text" formControlName="date"></ion-input>
