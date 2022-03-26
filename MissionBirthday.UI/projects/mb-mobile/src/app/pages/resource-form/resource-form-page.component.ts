@@ -12,6 +12,7 @@ import { CameraService } from '../../services/camera.service';
 })
 export class ResourceFormPageComponent implements OnInit {
   public resourceForm: FormGroup;
+  public locationGroup: FormGroup;
 
   constructor(private readonly camera: CameraService,
     private readonly adminApi: AdminApiService,
@@ -19,7 +20,7 @@ export class ResourceFormPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.resourceForm = new FormGroup({
-      organization: new FormControl(),
+      organization: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
       phoneNumber: new FormControl(),
       email: new FormControl(),
@@ -28,14 +29,15 @@ export class ResourceFormPageComponent implements OnInit {
         street1: new FormControl(),
         street2: new FormControl(),
         city: new FormControl(),
-        state: new FormControl(),
-        zip: new FormControl()
+        state: new FormControl('', [Validators.required, Validators.minLength(2)]),
+        zip: new FormControl('', [Validators.required, Validators.minLength(5)])
       }),
       date: new FormControl(),
       time: new FormControl(),
       details: new FormControl(),
       items: new FormControl([])
-    })
+    });
+    this.locationGroup = this.resourceForm.controls.location as FormGroup;
   }
 
   addItem(input: HTMLInputElement): void {

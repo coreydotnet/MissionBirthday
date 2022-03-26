@@ -17,7 +17,10 @@
     <ion-input type="url" formControlName="url"></ion-input>
 
     <label>Food Bank Name: </label>
-    <ion-input type="text" formControlName="organization"></ion-input>
+    <div>
+        <ion-input type="text" formControlName="organization"></ion-input>
+        <span style="color: red" *ngIf="resourceForm.controls.organization.errors && resourceForm.controls.organization.touched">Food Bank is required</span>
+    </div>
 
     <strong class="grid-span">Location</strong>
     <div formGroupName="location" style="display:contents">
@@ -31,10 +34,16 @@
         <ion-input type="text" formControlName="city"></ion-input>
 
         <label>State: </label>
-        <ion-input type="text" formControlName="state"></ion-input>
+        <div>
+            <ion-input type="text" formControlName="state"></ion-input>
+            <span style="color: red" *ngIf="locationGroup.controls.state.errors && locationGroup.controls.state.touched">State must be at least 2 letters</span>
+        </div>
 
         <label>Zip Code: </label>
-        <ion-input type="text" formControlName="zip"></ion-input>
+        <div>
+            <ion-input type="text" formControlName="zip"></ion-input>
+            <span style="color: red" *ngIf="locationGroup.controls.zip.errors && locationGroup.controls.zip.touched">Zip Code must be at least 5 characters</span>
+        </div>
     </div>
 
     <strong class="grid-span">Event Info</strong>
