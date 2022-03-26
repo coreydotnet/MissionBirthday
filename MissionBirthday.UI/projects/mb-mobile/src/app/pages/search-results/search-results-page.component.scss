@@ -6,8 +6,12 @@
 }
 
 h4 {
-    color: $page-text;
     margin: 2rem;
+    font-weight: bold;
+}
+
+h5 {
+    font-weight: bold;
 }
 
 .event-list {
@@ -18,7 +22,7 @@ h4 {
 
 .event-container {
     border: 2px solid $box-border;
-    padding: 0.5rem;
+    padding: 1rem;
     color: white;
     margin: 2rem;
     margin-top:0;

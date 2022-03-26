@@ -10,3 +10,14 @@ form {
         width: 22rem;
     }
 }
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.add-resource {
+    align-self: flex-end;
+    max-width: 20rem;
+}
