@@ -11,6 +11,8 @@ using MissionBirthday.Logic.AzureAi;
 using MissionBirthday.Persistence.Repositories;
 using MissionBirthday.Contracts.Events;
 using MissionBirthday.Logic.Events;
+using MissionBirthday.Logic;
+using MissionBirthday.Contracts;
 
 namespace MissionBirthday.Api
 {
@@ -20,6 +22,7 @@ namespace MissionBirthday.Api
         {
             services.Configure<OcrOptions>(configuration.GetSection(nameof(OcrOptions)));
             services.Configure<LanguageServiceOptions>(configuration.GetSection(nameof(LanguageServiceOptions)));
+            services.Configure<HoundBotOptions>(configuration.GetSection(nameof(HoundBotOptions)));
 
             return services;
         }
@@ -30,6 +33,7 @@ namespace MissionBirthday.Api
             services.AddSingleton<IOcrService, OcrService>();
             services.AddSingleton<IEntityExtractionService, EntityExtractionService>();
             services.AddSingleton<IEntitiesToEventConverter, EntitiesToEventConverter>();
+            services.AddSingleton<IHoundBotService, HoundBotService>();
 
             // Scoped (usually require a DB repository)
             services.AddScoped<IEventService, EventService>();
