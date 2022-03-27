@@ -22,6 +22,8 @@ export class HomePageComponent implements OnInit {
   search(): void {
     if (this.searchForm.valid) {
       this.router.navigate(['/search', this.searchForm.value.zipCode]);
+    } else {
+      this.searchForm.markAllAsTouched();
     }
   }
 

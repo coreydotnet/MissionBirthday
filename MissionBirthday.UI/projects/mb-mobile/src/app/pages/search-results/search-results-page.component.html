@@ -1,15 +1,25 @@
-<h4>Resource Search Results</h4>
-<div class="event-list">
-    <div *ngFor="let event of event$ | async" class="event-container">
-        <h5>{{event.organization}} - {{event.title}}</h5>
-        <div>
-            <p>{{event.location.street1}}</p>
-            <p *ngIf="event.location.street2">{{event.location.street2}}</p>
-            <p>{{event.location.city}}, {{event.location.state}} {{event.location.zip }}</p>
+<ng-container *ngIf="!error; else errorDisplay">
+    <h4>Resource Search Results</h4>
+    <div class="event-list">
+        <div *ngFor="let event of event$ | async" class="event-container">
+            <h5>{{event.organization}} - {{event.title}}</h5>
+            <div>
+                <p>{{event.location.street1}}</p>
+                <p *ngIf="event.location.street2">{{event.location.street2}}</p>
+                <p>{{event.location.city}}, {{event.location.state}} {{event.location.zip }}</p>
+            </div>
+            <div class="contact-info">
+                <span *ngIf="event.phoneNumber">Phone: <a href="tel:+{{event.phoneNumber}}">{{event.phoneNumber}}</a></span>
+                <span *ngIf="event.email">Email: <a href="mailto:{{event.email}}">{{event.email}}</a></span>
+                <span *ngIf="event.url">Website: <a href="{{event.url}}" target="_blank">{{event.url}}</a></span>
+            </div>
+            <p>{{event.date}} {{event.time}}</p>
+        
+            <p>{{event.details}}</p>
+            <p *ngIf="event.items?.length"> Items: {{event.items | itemList}}</p>
         </div>
-        <p>{{event.date}} {{event.time}}</p>
-    
-        <p>{{event.details}}</p>
-        <p *ngIf="event.items?.length"> Items: {{event.items | itemList}}</p>
     </div>
-</div>
+</ng-container>
+<ng-template #errorDisplay>
+    <h4>Invalid Zip Code</h4>
+</ng-template>

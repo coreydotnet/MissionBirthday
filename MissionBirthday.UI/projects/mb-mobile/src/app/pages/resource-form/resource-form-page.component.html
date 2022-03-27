@@ -8,6 +8,12 @@
 
 <form class="form-container"  [formGroup]="resourceForm" (ngSubmit)="addEvent()">
     <strong class="grid-span">Resource Information</strong>
+    <label>Organization: </label>
+    <div>
+        <ion-input type="text" formControlName="organization"></ion-input>
+        <span style="color: red" *ngIf="resourceForm.controls.organization.errors && resourceForm.controls.organization.touched">Food Bank is required</span>
+    </div>
+
     <label>Phone Number: </label>
     <ion-input type="tel" formControlName="phoneNumber"></ion-input>
 
@@ -16,12 +22,6 @@
 
     <label>Website: </label>
     <ion-input type="url" formControlName="url"></ion-input>
-
-    <label>Food Bank Name: </label>
-    <div>
-        <ion-input type="text" formControlName="organization"></ion-input>
-        <span style="color: red" *ngIf="resourceForm.controls.organization.errors && resourceForm.controls.organization.touched">Food Bank is required</span>
-    </div>
 
     <strong class="grid-span">Location</strong>
     <div formGroupName="location" style="display:contents">

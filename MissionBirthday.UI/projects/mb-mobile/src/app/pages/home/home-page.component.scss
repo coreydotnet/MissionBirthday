@@ -1,13 +1,19 @@
+@import '../../../theme/colors.scss';
+
 :host {
     height: 100%;
+    overflow-y: auto;
 }
 
 form {
     margin-top: 7rem;
-    display: flex;
     align-self: center;
-    ion-input {
-        width: 22rem;
+
+    div {
+        display: flex;
+        ion-input {
+            width: 22rem;
+        }
     }
 }
 
@@ -15,9 +21,25 @@ form {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    margin-bottom: 2rem;
 }
 
 .add-resource {
     align-self: flex-end;
     max-width: 20rem;
+
+    border: 2px solid #0DD7FF;
+    margin-inline: 0;
+}
+
+h1, h4 {
+    color: $title-text;
+}
+
+.hound-bot-title {
+    display: flex;
+    align-items: center;
+    ion-avatar {
+        margin-right: 1rem;
+    }
 }
