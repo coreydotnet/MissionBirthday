@@ -92,6 +92,10 @@
         --background: #0DD7FF;
         --color: black;
     }
+
+    ion-card-title {
+        --color: white;
+    }
   }
   
   @media (prefers-color-scheme: dark) {
