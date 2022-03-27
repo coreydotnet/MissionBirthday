@@ -4,7 +4,7 @@ import { HoundBotService } from './hound-bot.service';
 @Component({
   selector: 'lib-hound-bot',
   template: `
-  <div style="max-height:30rem">
+  <div>
     <ion-button (click)="startChat()" [hidden]="chatRunning">Start Chat</ion-button>
     <div id="webchat" role="main"></div>
   </div>
@@ -29,9 +29,10 @@ export class HoundBotComponent implements OnInit {
       const styleSet = webChat.createStyleSet({
         bubbleBackground: '#0DD7FF',
         bubbleFromUserBackground: '#00FF9D',
+        botAvatarBackgroundColor: '#0083E8',
 
-        rootHeight: '25rem',
-        rootWidth: '20rem'
+        rootHeight: '35rem',
+        rootWidth: '30rem'
      });
       webChat.renderWebChat(
         {
@@ -42,6 +43,7 @@ export class HoundBotComponent implements OnInit {
           styleSet,
           styleOptions: {
             botAvatarInitials: 'HB',
+
             botAvatarImage: 'https://missionbirthday.azurewebsites.net/assets/images/RollyHB2.png',
             hideUploadButton: true,
           }
