@@ -34,13 +34,23 @@ namespace MissionBirthday.Api.Controllers
             return Ok(await repository.GetAllAsync());
         }
 
-        [HttpGet("search/{zipCode}")]
+        [HttpGet("search/{zipCode?}")]
         public async Task<IActionResult> SearchByZipCodeAsync(string zipCode)
         {
             if (string.IsNullOrWhiteSpace(zipCode))
-                return BadRequest();
+                return BadRequest("Please provide a valid zip code");
 
-            return Ok(await eventService.GetAllAsync(zipCode));
+            try
+            {
+                var events = await eventService.GetAllAsync(zipCode);
+
+                return Ok(events);
+            }
+            catch (ArgumentException ex)
+            {
+                logger.LogError(ex, ex.Message);
+                return BadRequest("Please provide a valid zip code");
+            }
         }
 
         [HttpGet("{id}")]

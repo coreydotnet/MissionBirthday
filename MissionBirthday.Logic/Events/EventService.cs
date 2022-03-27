@@ -36,13 +36,12 @@ namespace MissionBirthday.Logic.Events
 
         public async Task<ICollection<Event>> GetAllAsync(string zipCode)
         {
-            var events = await eventRepository.GetAllAsync();
-
             var targetZip = ZipToNumber(zipCode);
 
             if (targetZip == 0)
-                return events;
+                throw new ArgumentException("That is not a valid zip code", nameof(zipCode));
 
+            var events = await eventRepository.GetAllAsync();
             return events.OrderBy(e => Distance(ZipToNumber(e.Location.Zip), targetZip))
                 .ThenBy(e => e.Organization, StringComparer.InvariantCultureIgnoreCase)
                 .ToArray();

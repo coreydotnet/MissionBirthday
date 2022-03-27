@@ -12,6 +12,12 @@ namespace MissionBirthday.Contracts.Events
     { 
         Task<EventDocument> CreateEventFromImageAsync(Stream imageStream);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="zipCode"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException">Thrown if can't convert <paramref name="zipCode"/> into a number.</exception>
         Task<ICollection<Event>> GetAllAsync(string zipCode);
     }
 }
