@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { CharityEvent } from '../../interfaces/charity-event.interface';
 import { EventService } from '../../services/event.service';
 
@@ -18,6 +18,10 @@ export class SearchResultsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.event$ = this.events.getAreaEvents(this.route.snapshot.params.zipCode).pipe(
+      map(events => events.map(e => ({
+        ...e,
+        url: e.url.startsWith('http') ? e.url : e.url ? `https://${e.url}`: null
+      }))),
       catchError((err) => {
         this.error = 'Invalid Zip Code';
         return throwError(err);
