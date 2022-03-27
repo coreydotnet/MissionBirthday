@@ -11,7 +11,7 @@
             <div class="contact-info">
                 <span *ngIf="event.phoneNumber">Phone: <a href="tel:+{{event.phoneNumber}}">{{event.phoneNumber}}</a></span>
                 <span *ngIf="event.email">Email: <a href="mailto:{{event.email}}">{{event.email}}</a></span>
-                <span *ngIf="event.url">Website: <a href="https://{{event.url}}">{{event.url}}</a></span>
+                <span *ngIf="event.url">Website: <a href="//{{event.url}}">{{event.url}}</a></span>
             </div>
             <p>{{event.date}} {{event.time}}</p>
         
