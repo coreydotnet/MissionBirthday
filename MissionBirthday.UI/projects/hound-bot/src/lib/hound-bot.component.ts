@@ -42,7 +42,7 @@ export class HoundBotComponent implements OnInit {
           styleSet,
           styleOptions: {
             botAvatarInitials: 'HB',
-            botAvatarImage: undefined,
+            botAvatarImage: 'https://missionbirthday.azurewebsites.net/assets/images/RollyHB2.png',
             hideUploadButton: true,
           }
         },
