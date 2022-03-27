@@ -65,6 +65,7 @@ namespace MissionBirthday.Api
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapFallbackToFile("/index.html");
                 endpoints.MapControllers();
             });
         }
