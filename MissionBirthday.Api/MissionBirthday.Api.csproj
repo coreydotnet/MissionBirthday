@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -20,4 +20,7 @@
     <ProjectReference Include="..\MissionBirthday.Persistence\MissionBirthday.Persistence.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="App\**" CopyToOutputDirectory="Always"/>
+	</ItemGroup>
 </Project>
