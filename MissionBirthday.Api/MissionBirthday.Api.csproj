@@ -21,6 +21,10 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Content Include="App\**" CopyToOutputDirectory="Always"/>
+		<Content Include="App\**" CopyToOutputDirectory="Always" />
 	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition=" '$(Configuration)'=='Release' ">
+	  <Exec Command="pushd $(SolutionDir)MissionBirthday.UI&#xD;&#xA;echo Building Hound Bot library&#xD;&#xA;call ng build hound-bot&#xD;&#xA;echo Building Missiong Birthday mobile app&#xD;&#xA;call ng build --configuration=production&#xD;&#xA;popd" />
+	</Target>
 </Project>
