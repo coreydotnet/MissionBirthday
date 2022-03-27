@@ -1,21 +1,39 @@
 <form [formGroup]="searchForm" (ngSubmit)="search()">
-    <ion-input type="search" formControlName="zipCode"
+    <div>
+        <ion-input type="search" formControlName="zipCode"
         placeholder="Enter your zip code to find nearby resources"></ion-input>
-    <button type="submit">
-        <ion-icon name="search-outline"></ion-icon>
-    </button>
+        <button type="submit">
+            <ion-icon name="search-outline"></ion-icon>
+        </button>
+    </div>
+    <span style="color: red" *ngIf="searchForm.controls.zipCode.errors && searchForm.controls.zipCode.touched">Zip Code is Required</span>
 </form>
 
+<h4>At Mission Birthday, we believe everyone should have food security and this project strives to make that easier for every family. We also want to help pregnant women find the resources and infant supplies they need to care for their baby from birth and through all their child's birthdays.</h4>
+
 <div class="footer">
-    <ion-card class="add-resource">
-        <ion-card-header>
-            <!-- For Corey to make look like a link -->
-            <ion-card-title><a routerLink="/add-resource">Add a Resource</a></ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            If your organization provides food or infant supplies through a community program or food bank you can submit your information to Mission Birthday to be included in our resource search.
-        </ion-card-content>
-    </ion-card>
+    <div>
+        <ion-card class="add-resource">
+            <ion-card-header>
+                <!-- For Corey to make look like a link -->
+                <ion-card-title>Hound Bot</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <p>Use our friendly chat bot to interactively find food and infant supplies near you.</p>
+                <br/>
+                <p>Click the "Start Chat" button to begin.</p>
+            </ion-card-content>
+        </ion-card>
+        <ion-card class="add-resource">
+            <ion-card-header>
+                <!-- For Corey to make look like a link -->
+                <ion-card-title><a routerLink="/add-resource">Add a Resource</a></ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                If your organization provides food or infant supplies through a community program or food bank you can submit your information to Mission Birthday to be included in our resource search.
+            </ion-card-content>
+        </ion-card>
+    </div>
 
     <lib-hound-bot></lib-hound-bot>
 </div>
