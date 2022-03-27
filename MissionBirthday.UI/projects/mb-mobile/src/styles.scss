@@ -30,8 +30,20 @@ html {
 
         // Extra large devices (large desktops, 1200px and up)
         @media (min-width: 1200px) { 
+            padding-left: 15rem;
+            padding-right: 15rem;
+         }
+
+        // Huge devices (large desktops, 1600px and up)
+        @media (min-width: 1600px) { 
             padding-left: 20rem;
             padding-right: 20rem;
+         }
+
+        // Massive devices (4k, 1600px and up)
+        @media (min-width: 2000px) { 
+            padding-left: 30rem;
+            padding-right: 30rem;
          }
     }
 }
