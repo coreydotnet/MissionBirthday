@@ -10,6 +10,6 @@
         <p>{{event.date}} {{event.time}}</p>
     
         <p>{{event.details}}</p>
-        <p>Items: {{event.items | itemList}}</p>
+        <p *ngIf="event.items?.length"> Items: {{event.items | itemList}}</p>
     </div>
 </div>
