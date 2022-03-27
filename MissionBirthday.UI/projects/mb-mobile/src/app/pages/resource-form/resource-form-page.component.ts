@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonModal, LoadingController } from '@ionic/angular';
-import { from, map, shareReplay, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, from, map, shareReplay, switchMap, tap, throwError, withLatestFrom } from 'rxjs';
 import { AdminApiService } from '../../services/admin-api.service';
 import { CameraService } from '../../services/camera.service';
 import { SampleDataService } from './sample-image-picker/sample-data.service';
@@ -74,7 +74,13 @@ export class ResourceFormPageComponent implements OnInit {
       switchMap(() => this.camera.takePicture()),
       map(image => this.camera.getPhotoBlob(image)),
       switchMap(blob => this.adminApi.uploadForOcr(blob)),
-      withLatestFrom(spinner$)
+      withLatestFrom(spinner$),
+      catchError((err) => {
+        return spinner$.pipe(
+          tap(spinner => spinner.dismiss()),
+          switchMap(() => throwError(err))
+        )
+      })
     ).subscribe(([parsedEvent, spinner]) => {
       this.resourceForm.patchValue(parsedEvent);
       spinner.dismiss();

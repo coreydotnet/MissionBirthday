@@ -30,8 +30,6 @@ export class HoundBotComponent implements OnInit {
         bubbleBackground: '#0DD7FF',
         bubbleFromUserBackground: '#00FF9D',
 
-        botAvatarInitials: 'HB',
-        userAvatarInitials: 'US',
         rootHeight: '25rem',
         rootWidth: '20rem'
      });
@@ -43,6 +41,8 @@ export class HoundBotComponent implements OnInit {
           username: 'You',
           styleSet,
           styleOptions: {
+            botAvatarInitials: 'HB',
+            botAvatarImage: undefined,
             hideUploadButton: true,
           }
         },
