@@ -20,7 +20,7 @@ export class SearchResultsPageComponent implements OnInit {
     this.event$ = this.events.getAreaEvents(this.route.snapshot.params.zipCode).pipe(
       map(events => events.map(e => ({
         ...e,
-        url: e.url.startsWith('http') ? e.url : e.url ? `https://${e.url}`: null
+        url: e.url?.startsWith('http') ? e.url : e.url ? `https://${e.url}`: null
       }))),
       catchError((err) => {
         this.error = 'Invalid Zip Code';

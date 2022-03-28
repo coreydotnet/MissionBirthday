@@ -7,11 +7,9 @@
 
 h4 {
     color: $page-text;
-    margin: 2rem;
 }
 
 .upload-buttons {
-    margin-left: 2rem;
     margin-bottom: 0.5rem;
     
     ion-button {
@@ -22,8 +20,8 @@ h4 {
 .form-container {
     border: 2px solid $box-border;
     color: white;
-    margin: 2rem;
     margin-top:0;
+    margin-bottom: 1rem;
 
     display: grid;
     grid-template-columns: auto 1fr;
@@ -54,4 +52,31 @@ h4 {
 
 strong {
     margin-top: 0.5rem;
+}
+
+// Extra Small devices (landscape phones, 575px and below)
+@media (max-width: 575.9999px) {
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        ion-button {
+            align-self: flex-end;
+            min-height: 36px;
+        }
+    }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+    h4 {
+        margin: 2rem;
+    }
+    .upload-buttons {
+        margin-left: 2rem;
+    }
+    .form-container {
+        margin: 2rem;
+    }
 }

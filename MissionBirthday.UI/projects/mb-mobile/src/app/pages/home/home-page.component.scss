@@ -7,22 +7,35 @@
 }
 
 form {
-    margin-top: 7rem;
-    align-self: center;
 
     div {
         display: flex;
         ion-input {
             width: 22rem;
+            color: white;
         }
     }
 }
 
 .footer {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: stretch;
     margin-bottom: 2rem;
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+    form {
+        margin-top: 7rem;
+        align-self: center;
+    }
+
+    .footer {
+        flex-direction: row;
+        align-items: flex-end;
+    }
 }
 
 .add-resource {

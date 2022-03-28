@@ -10,6 +10,10 @@ html {
     ion-app {
         width: 100%;
 
+        // Extra Small devices (landscape phones, 0px and up)
+        padding-left: 1rem;
+        padding-right: 1rem;
+
         // Small devices (landscape phones, 576px and up)
         @media (min-width: 576px) {
             padding-left: 1rem;
