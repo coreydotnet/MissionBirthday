@@ -24,22 +24,22 @@ namespace MissionBirthday.Persistence
                 {
                     Organization = "Sierra Bible Church",
                     Title = "Food Pantry",
-                    PhoneNumber = "775-555-1234",
-                    Url = "sierrabiblechurch.edu",
+                    PhoneNumber = "775-747-1217",
+                    Url = "www.sierrabible.org",
                     Date = "Every Wednesday",
                     Time = "5:00pm - 8:00pm",
                     Address = new Address
                     {
-                        Street1 = "1234 Main St.",
+                        Street1 = "3195 Everett Drive",
                         City = "Reno",
                         State = "NV",
-                        Zip = "89456"
+                        Zip = "89503"
                     }
                 },
                 new Event
                 {
                     Organization = "Eastside Church",
-                    Title = "",
+                    Title = "Free Food Market",
                     PhoneNumber = "541-447-3791",
                     Url = "",
                     Date = "Second Monday of each month",
@@ -73,7 +73,7 @@ namespace MissionBirthday.Persistence
                 new Event
                 {
                     Organization = "Prineville Mobile Pantry",
-                    Title = "",
+                    Title = "Mobile Food Pantry",
                     PhoneNumber = "",
                     Url = "",
                     Date = "second and fourth Thursday of every month",
@@ -90,7 +90,7 @@ namespace MissionBirthday.Persistence
                 new Event
                 {
                     Organization = "St. Vincent De Paul – Prineville",
-                    Title = "",
+                    Title = "Food Pantry",
                     PhoneNumber = "(541) 447-7662",
                     Url = "svdpofcc.org",
                     Date = "",
