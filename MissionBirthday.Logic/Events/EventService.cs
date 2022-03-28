@@ -51,7 +51,7 @@ namespace MissionBirthday.Logic.Events
         {
             var ocrResults = await ocrService.ReadAsync(imageStream);
             var document = ocrResults != null
-                ? string.Join(Environment.NewLine, ocrResults.TextLines)
+                ? string.Join($" {Environment.NewLine}", ocrResults.TextLines)
                 : string.Empty;
             return document;
         }

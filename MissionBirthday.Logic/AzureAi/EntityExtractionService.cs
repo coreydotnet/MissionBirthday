@@ -42,7 +42,7 @@ namespace MissionBirthday.Logic.AzureAi
 
                     if (entities.Count > 0)
                     {
-                        results = entities.Select(e => new Entity(e.Text, MapCategory(e.Category), e.SubCategory, e.ConfidenceScore))
+                        results = entities.Select(e => new Entity(e.Text.Replace(Environment.NewLine, string.Empty), MapCategory(e.Category), e.SubCategory, e.ConfidenceScore))
                             .ToArray();
                     }
                 }
