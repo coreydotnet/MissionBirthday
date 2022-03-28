@@ -8,7 +8,7 @@
 
 <form class="form-container"  [formGroup]="resourceForm" (ngSubmit)="addEvent()">
     <strong class="grid-span">Resource Information</strong>
-    <label>Organization: </label>
+    <label>Organization *: </label>
     <div>
         <ion-input type="text" formControlName="organization"></ion-input>
         <span style="color: red" *ngIf="resourceForm.controls.organization.errors && resourceForm.controls.organization.touched">Food Bank is required</span>
@@ -31,19 +31,19 @@
         <label>Address Line 2: </label>
         <ion-input type="text" formControlName="street2"></ion-input>
 
-        <label>City: </label>
+        <label>City *: </label>
         <div>
             <ion-input type="text" formControlName="city"></ion-input>
             <span style="color: red" *ngIf="locationGroup.controls.city.errors && locationGroup.controls.city.touched">City is required</span>
         </div>
 
-        <label>State: </label>
+        <label>State *: </label>
         <div>
             <ion-input type="text" formControlName="state"></ion-input>
             <span style="color: red" *ngIf="locationGroup.controls.state.errors && locationGroup.controls.state.touched">State must be at least 2 letters</span>
         </div>
 
-        <label>Zip Code: </label>
+        <label>Zip Code *: </label>
         <div>
             <ion-input type="text" formControlName="zip"></ion-input>
             <span style="color: red" *ngIf="locationGroup.controls.zip.errors && locationGroup.controls.zip.touched">Zip Code must be at least 5 characters</span>
@@ -51,7 +51,7 @@
     </div>
 
     <strong class="grid-span">Event Info</strong>
-    <label>* Title: </label>
+    <label>Title *: </label>
     <div>
         <ion-input type="text" formControlName="title"></ion-input>
         <span style="color: red" *ngIf="resourceForm.controls.title.errors && resourceForm.controls.title.touched">Title is required</span>
