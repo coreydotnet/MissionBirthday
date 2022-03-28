@@ -32,4 +32,12 @@ h5 {
 .contact-info {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+    .contact-info {
+        flex-direction: row;
+    }
 }
