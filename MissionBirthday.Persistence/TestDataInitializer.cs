@@ -104,6 +104,114 @@ namespace MissionBirthday.Persistence
                         State = "OR",
                         Zip = "97754"
                     }
+                },
+                new Event
+                {
+                    Organization = "Jericho Table at Church of God Seventh Day",
+                    Title = "Meals",
+                    PhoneNumber = "541-548-3367",
+                    Url = "jerichoroad.yolasite.com/programs",
+                    Date = "Monday-Thursday",
+                    Time = "5:00pm",
+                    Details = @"Providing hot, healthy food to the hungry of Redmond Oregon.",
+                    Address = new Address
+                    {
+                        Street1 = "205 NW 4th Street",
+                        Street2 = "",
+                        City = "Redmond",
+                        State = "OR",
+                        Zip = "97756"
+                    }
+                },
+                new Event
+                {
+                    Organization = "Redmond Assembly of God",
+                    Title = "Free Food Market",
+                    PhoneNumber = "541-548-4555",
+                    Url = "redmondag.com",
+                    Date = "First Wednesday of the month",
+                    Time = "3:30pm",
+                    Details = @"",
+                    Address = new Address
+                    {
+                        Street1 = "1865 West Antler Avenue",
+                        Street2 = "",
+                        City = "Redmond",
+                        State = "OR",
+                        Zip = "97756"
+                    }
+                },
+                new Event
+                {
+                    Organization = "Redmond Community Church",
+                    Title = "Food Pantry",
+                    PhoneNumber = "541-923-3023",
+                    Url = "redmondcc.org",
+                    Date = "Thursday",
+                    Time = "1:00pm-3:00pm",
+                    Details = @"",
+                    Address = new Address
+                    {
+                        Street1 = "237 NW 9th Street",
+                        Street2 = "",
+                        City = "Redmond",
+                        State = "OR",
+                        Zip = "97756"
+                    }
+                },
+                new Event
+                {
+                    Organization = "Redmond Mobile Pantry",
+                    Title = "Mobile Food Pantry",
+                    PhoneNumber = "",
+                    Url = "",
+                    Date = "First and Third Thursday of each month",
+                    Time = "Between 3:00pm – 4:30 pm",
+                    Details = @"Fresh produce and free food every week from NeighborImpact's mobile food pantry! Text FRESH to 541-577-1673 for a reminder whenever the Fresh 2 You truck is headed to Redmond.",
+                    Address = new Address
+                    {
+                        Street1 = "675 SW Rimrock Way",
+                        Street2 = "",
+                        City = "Redmond",
+                        State = "OR",
+                        Zip = "97756"
+                    }
+                },
+                new Event
+                {
+                    Organization = "Seventh Day Adventist Center",
+                    Title = "Food Pantry",
+                    PhoneNumber = "541-923-0301",
+                    Url = "redmond22.adventistchurchconnect.org",
+                    Date = "Tuesday",
+                    Time = "10:00am-2:00pm",
+                    Details = @"",
+                    Address = new Address
+                    {
+                        Street1 = "945 SW Glacier Avenue",
+                        Street2 = "",
+                        City = "Redmond",
+                        State = "OR",
+                        Zip = "97756"
+                    }
+                },
+                new Event
+                {
+                    Organization = "St. Vincent De Paul – Redmond",
+                    Title = "Food Pantry",
+                    PhoneNumber = "541-923-5264",
+                    Url = "stvincentdepaulredmond.com",
+                    Date = "Wednesday and Thursday",
+                    Time = "10:00am-2:00pm",
+                    Details = @"Supports individuals and families in need of food boxes, rent assistance, utility assistance, propane assistance, free clothing, free home items, education, outreach and agency referrals, home visit and services program.",
+                    Address = new Address
+                    {
+                        Street1 = "1615 SW Veteran's Way",
+                        Street2 = "",
+                        City = "Redmond",
+                        State = "OR",
+                        Zip = "97756"
+                    }
                 }
             };
 
