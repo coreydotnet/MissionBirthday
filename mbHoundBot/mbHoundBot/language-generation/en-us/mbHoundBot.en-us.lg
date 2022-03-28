@@ -1,0 +1,31 @@
+[import](common.lg)
+
+# SendActivity_Greeting()
+[Activity
+    Text = ${SendActivity_Greeting_text()}
+]
+
+# SendActivity_Greeting_text()
+- Welcome, I'm Hound Bot. I can search for food and infant supplies near your location.
+- Hi, I'm Hound Bot. I can search for food and infant supplies near your location.
+# SendActivity_DidNotUnderstand()
+[Activity
+    Text = ${SendActivity_DidNotUnderstand_text()}
+]
+
+# SendActivity_DidNotUnderstand_text()
+- Sorry, I didn't understand that. 
+# LogAction_Text_DGaXYz()
+[Activity
+    Text = ${LogAction_Text_DGaXYz_text()}
+]
+
+# LogAction_Text_DGaXYz_text()
+- find event
+# ConfirmInput_Prompt_tgNsIn()
+[Activity
+    Text = ${ConfirmInput_Prompt_tgNsIn_text()}
+]
+
+# ConfirmInput_Prompt_tgNsIn_text()
+- Would you like me to do a search for resources near you?

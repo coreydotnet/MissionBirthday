@@ -1,0 +1,37 @@
+[import](common.lg)
+
+# SendActivity_XICcxv()
+[Activity
+    Text = ${SendActivity_XICcxv_text()}
+]
+
+# SendActivity_XICcxv_text()
+- First, I need your location.
+# TextInput_Prompt_EAUkpK()
+[Activity
+    Text = ${TextInput_Prompt_EAUkpK_text()}
+]
+
+# TextInput_Prompt_EAUkpK_text()
+- What is your zip code?
+# TextInput_UnrecognizedPrompt_EAUkpK()
+[Activity
+    Text = ${TextInput_UnrecognizedPrompt_EAUkpK_text()}
+]
+
+# TextInput_UnrecognizedPrompt_EAUkpK_text()
+- Sorry, I do not understand '${this.value}'. Please specify a 5 digit US postal code in the format 54321.
+# TextInput_InvalidPrompt_EAUkpK()
+[Activity
+    Text = ${TextInput_InvalidPrompt_EAUkpK_text()}
+]
+
+# TextInput_InvalidPrompt_EAUkpK_text()
+- Sorry, '${this.value}' is not valid. Please specify a 5 digit postal zip code, for example, 97703.
+# TextInput_DefaultValueResponse_EAUkpK()
+[Activity
+    Text = ${TextInput_DefaultValueResponse_EAUkpK_text()}
+]
+
+# TextInput_DefaultValueResponse_EAUkpK_text()
+- I was unable to get a valid zip code.

@@ -1,0 +1,85 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "gnR7A2",
+    "name": "houndSearch",
+    "comment": "requests the user's location and searches for nearby resources"
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "ATRYJ8"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "tZU5q7"
+          },
+          "activityProcessed": true,
+          "dialog": "locationRequest",
+          "resultProperty": "dialog.locResult"
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "AAFc79"
+          },
+          "condition": "dialog.locResult == \"0\"",
+          "actions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "8jadzq"
+              },
+              "activity": "${SendActivity_8jadzq()}"
+            },
+            {
+              "$kind": "Microsoft.DeleteProperty",
+              "$designer": {
+                "id": "2fYI2m"
+              },
+              "property": "user.zipcode"
+            },
+            {
+              "$kind": "Microsoft.EndDialog",
+              "$designer": {
+                "id": "YQoJbN"
+              }
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "Ei2EZ7"
+          },
+          "activityProcessed": true,
+          "dialog": "resourceSearch"
+        },
+        {
+          "$kind": "Microsoft.DeleteProperty",
+          "$designer": {
+            "id": "Y71MwO"
+          },
+          "property": "user.zipcode"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "MCroIQ"
+          },
+          "activity": "${SendActivity_MCroIQ()}"
+        }
+      ]
+    }
+  ],
+  "generator": "houndSearch.lg",
+  "recognizer": "houndSearch.lu.qna",
+  "id": "houndSearch"
+}

@@ -1,0 +1,18 @@
+[import](common.lg)
+
+# SendActivity_MCroIQ()
+[Activity
+    Text = ${SendActivity_MCroIQ_text()}
+]
+
+# SendActivity_MCroIQ_text()
+- Thank you for using Hound Bot. Let me know if there's anything else I can help with.
+- Thanks for using Hound Bot resource search. Let me know if you would like to search again.
+# SendActivity_8jadzq()
+[Activity
+    Text = ${SendActivity_8jadzq_text()}
+]
+
+# SendActivity_8jadzq_text()
+- ```Let me know if you would like to search again.
+Thank you for using Hound Bot.```

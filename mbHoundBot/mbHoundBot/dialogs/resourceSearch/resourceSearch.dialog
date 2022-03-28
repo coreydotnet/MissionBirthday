@@ -1,0 +1,143 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "Ly5xj3",
+    "name": "resourceSearch",
+    "comment": "Find a resource based on zip code."
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "zQPiiW"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "pnzGAI"
+          },
+          "activity": "${SendActivity_pnzGAI()}"
+        },
+        {
+          "$kind": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "HHCPav"
+          },
+          "method": "GET",
+          "url": "https://missionbirthday.azurewebsites.net/api/events/search/${user.zipcode}",
+          "resultProperty": "turn.result",
+          "responseType": "json"
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "SyJ6zM"
+          },
+          "condition": "turn.result.statusCode ==  400",
+          "actions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "2wfsJI"
+              },
+              "activity": "${SendActivity_2wfsJI()}"
+            },
+            {
+              "$kind": "Microsoft.EndDialog",
+              "$designer": {
+                "id": "p4nhek"
+              }
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "bA8387"
+          },
+          "property": "dialog.findresult",
+          "value": "=turn.result.content"
+        },
+        {
+          "$kind": "Microsoft.SetProperties",
+          "$designer": {
+            "id": "AP6sil"
+          },
+          "assignments": [
+            {
+              "property": "dialog.firstresult",
+              "value": "=dialog.findresult[0]"
+            },
+            {
+              "property": "dialog.secondresult",
+              "value": "=dialog.findresult[1]"
+            },
+            {
+              "property": "dialog.resultindex",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "8SCHLh"
+          },
+          "activity": "${SendActivity_8SCHLh()}"
+        },
+        {
+          "$kind": "Microsoft.ConfirmInput",
+          "$designer": {
+            "id": "fvCRW7"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "prompt": "${ConfirmInput_Prompt_fvCRW7()}",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or "
+          },
+          "property": "dialog.showMore"
+        },
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "9Zprmd"
+          },
+          "condition": "=dialog.showMore",
+          "actions": [
+            {
+              "$kind": "Microsoft.SetProperty",
+              "$designer": {
+                "id": "e7gese"
+              },
+              "property": "dialog.resultindex",
+              "value": "= dialog.resultindex+1"
+            },
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "xcdZkm"
+              },
+              "activity": "${SendActivity_xcdZkm()}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generator": "resourceSearch.lg",
+  "recognizer": "resourceSearch.lu.qna",
+  "id": "resourceSearch"
+}

@@ -1,0 +1,168 @@
+[import](common.lg)
+
+# SendActivity_pnzGAI()
+[Activity
+    Text = ${SendActivity_pnzGAI_text()}
+]
+
+# SendActivity_pnzGAI_text()
+- Searching near ${user.zipcode}.
+# ConfirmInput_Prompt_fvCRW7()
+[Activity
+    Text = ${ConfirmInput_Prompt_fvCRW7_text()}
+]
+
+# ConfirmInput_Prompt_fvCRW7_text()
+- Would you like to see more options?
+# SendActivity_8SCHLh()
+[Activity
+   Attachments = ${json(ResourceCard())}
+]
+
+# SendActivity_8SCHLh_attachment_xNVQ8V()
+- ```{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.2",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "${dialog.firstresult.organization}",
+      "weight": "bolder",
+      "isSubtle": false
+    },
+    {
+      "type": "TextBlock",
+      "text": "${dialog.firstresult.phoneNumber}",
+      "spacing": "none"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${dialog.firstresult.date}",
+      "spacing": "none"
+    },
+  ]
+}```
+# ResourceCard()
+- ```{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.3",
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "Medium",
+            "weight": "Bolder",
+            "text": "${dialog.findresult[dialog.resultindex].title}",
+            "color": "accent"
+        },
+        {
+            "type": "TextBlock",
+            "text": "${dialog.findresult[dialog.resultindex].organization}",
+            "wrap": true,
+            "weight": "Bolder"
+        },
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "${dialog.findresult[dialog.resultindex].phoneNumber}",
+                            "wrap": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "${dialog.findresult[dialog.resultindex].email}",
+                            "wrap": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "${dialog.findresult[dialog.resultindex].url}",
+                            "wrap": true
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "${dialog.findresult[dialog.resultindex].location.street1}",
+                            "wrap": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "${dialog.findresult[dialog.resultindex].location.street2}",
+                            "wrap": true,
+                            "$when": "${dialog.findresult[dialog.resultindex].location.street2}"
+                        },
+                        {
+                            "type": "ColumnSet",
+                            "columns": [
+                                {
+                                    "type": "Column",
+                                    "width": "stretch",
+                                    "items": [
+                                        {
+                                            "type": "TextBlock",
+                                            "text": "${dialog.findresult[dialog.resultindex].location.city}",
+                                            "wrap": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Column",
+                                    "width": "auto",
+                                    "items": [
+                                        {
+                                            "type": "TextBlock",
+                                            "text": "${dialog.findresult[dialog.resultindex].location.state}",
+                                            "horizontalAlignment": "Left"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Column",
+                                    "width": "stretch",
+                                    "items": [
+                                        {
+                                            "type": "TextBlock",
+                                            "text": "${dialog.findresult[dialog.resultindex].location.zip}",
+                                            "horizontalAlignment": "Right"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "text": "${dialog.findresult[dialog.resultindex].details}",
+            "wrap": true,
+            "separator": true
+        }
+    ],
+}```
+# SendActivity_xcdZkm()
+[Activity
+    Attachments = ${json(ResourceCard())}
+]
+
+# SendActivity_xcdZkm_text()
+- $json(${ResourceCard()})
+# SendActivity_2wfsJI()
+[Activity
+    Text = ${SendActivity_2wfsJI_text()}
+]
+
+# SendActivity_2wfsJI_text()
+- ```I'm sorry, the server responed with ${turn.result.content}.
+Please try again.```

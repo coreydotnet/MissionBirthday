@@ -1,0 +1,60 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "CwaWEf",
+    "name": "locationRequest",
+    "comment": "Gets the user's zip code."
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "N8FRM0"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "XICcxv"
+          },
+          "activity": "${SendActivity_XICcxv()}"
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "EAUkpK"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${TextInput_Prompt_EAUkpK()}",
+          "unrecognizedPrompt": "${TextInput_UnrecognizedPrompt_EAUkpK()}",
+          "invalidPrompt": "${TextInput_InvalidPrompt_EAUkpK()}",
+          "property": "user.zipcode",
+          "outputFormat": "=trim(this.value)",
+          "validations": [
+            "=isMatch(this.value, \"^[0-9]+$\")",
+            "length(this.value) == 5"
+          ],
+          "defaultValue": "0",
+          "defaultValueResponse": "${TextInput_DefaultValueResponse_EAUkpK()}"
+        },
+        {
+          "$kind": "Microsoft.EndDialog",
+          "$designer": {
+            "id": "Md9y9I"
+          },
+          "value": "=user.zipcode"
+        }
+      ]
+    }
+  ],
+  "generator": "locationRequest.lg",
+  "recognizer": "locationRequest.lu.qna",
+  "id": "locationRequest"
+}
